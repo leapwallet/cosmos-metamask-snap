@@ -14,6 +14,7 @@ import { bech32 } from 'bech32';
 import { DirectSecp256k1Wallet } from "@cosmjs/proto-signing";
 import { SLIP10Node } from '@metamask/key-tree';
 import { BigNumber } from 'bignumber.js';
+import parser from './helpers/parser'
 
 
 export namespace Secp256k1 {
@@ -287,7 +288,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ origin, request }) => 
           type: 'confirmation',
           content: panel([
             heading(`0.005 Atom Transaction`),
-            text('Are you sure of sending **0.005 ATOM** to cosmos19vf5mfr40awvkefw69nl6p3mmlsnacmm28xyqh?'),
+            text(parser.parse('Are you sure of sending **0.005 ATOM** to cosmos19vf5mfr40awvkefw69nl6p3mmlsnacmm28xyqh?')),
           ]),
         },
       });
