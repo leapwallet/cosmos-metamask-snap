@@ -36,7 +36,7 @@ export enum MetamaskActions {
   SetInstalled = 'SetInstalled',
   SetFlaskDetected = 'SetFlaskDetected',
   SetError = 'SetError',
-  SetSuccess= 'SetSuccess'
+  SetSuccess = 'SetSuccess',
 }
 
 const reducer: Reducer<MetamaskState, MetamaskDispatch> = (state, action) => {
@@ -83,6 +83,10 @@ export const MetaMaskProvider = ({ children }: { children: ReactNode }) => {
     return <>{children}</>;
   }
 
+  return <MetaMaskProviderContent>{children}</MetaMaskProviderContent>;
+};
+
+function MetaMaskProviderContent({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -134,4 +138,4 @@ export const MetaMaskProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </MetaMaskContext.Provider>
   );
-};
+}
