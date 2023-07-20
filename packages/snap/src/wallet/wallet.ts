@@ -65,7 +65,7 @@ export function sortObject(obj: any): any {
 export function serializeSignDoc(signDoc: SignDoc) {
   return SignDoc.encode(
     SignDoc.fromPartial({
-      accountNumber: signDoc.accountNumber,
+      accountNumber: signDoc.accountNumber.toString(),
       authInfoBytes: signDoc.authInfoBytes,
       bodyBytes: signDoc.bodyBytes,
       chainId: signDoc.chainId,
