@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import styled, { useTheme } from 'styled-components';
+import { coin } from '@cosmjs/proto-signing';
 import { MetamaskActions, MetaMaskContext } from '../hooks';
 import {
   connectSnap,
@@ -10,10 +11,12 @@ import {
 import {
   ConnectButton,
   InstallFlaskButton,
-  ReconnectButton,
   SendHelloButton,
   Card,
 } from '../components';
+import { calculateFee, GasPrice } from '@cosmjs/stargate';
+import { Tx } from '../utils/tx';
+import { getOfflineSigner } from '../utils/cosmjsOfflineSigner';
 
 const Container = styled.div`
   display: flex;
@@ -117,8 +120,7 @@ const SuccessMessage = styled.div`
   }
 `;
 
-
-const Index = () => {
+const Page = () => {
   const theme = useTheme();
   const [state, dispatch] = useContext(MetaMaskContext);
 
@@ -138,11 +140,27 @@ const Index = () => {
   };
 
   const handleSendHelloClick = async () => {
-
     try {
-      const txnHash = await sendHello();
-      console.log(txnHash);
-      dispatch({ type: MetamaskActions.SetSuccess, payload: txnHash.transactionHash });
+      const rpcUrl = 'https://rpc.cosmos.directory/osmosis';
+      const senderAddress = 'osmo19vf5mfr40awvkefw69nl6p3mmlsnacmmzu45k9';
+      const recipientAddress = 'osmo1nhzcr7mrqedyy5gcnkwz38yc0jk9z7y7avzpju';
+      const amount = coin('1000', 'uosmo');
+      const memo = 'Hello from Leap Snap';
+      const gasPrice = GasPrice.fromString('0.025uosmo');
+      const fee = calculateFee(100_000, gasPrice);
+      const offlineSigner = getOfflineSigner('osmosis-1');
+      const tx = await Tx.create(rpcUrl, offlineSigner);
+      const txResponse = await tx.sendTokens(
+        senderAddress,
+        recipientAddress,
+        [amount],
+        fee,
+        memo,
+      );
+      dispatch({
+        type: MetamaskActions.SetSuccess,
+        payload: txResponse.transactionHash,
+      });
     } catch (e) {
       console.error(e);
       dispatch({ type: MetamaskActions.SetError, payload: e });
@@ -152,11 +170,9 @@ const Index = () => {
   return (
     <Container>
       <Heading>
-        <Span style={{color: theme.colors.text.default}}>Leap Snap</Span>
+        <Span style={{ color: theme.colors.text.default }}>Leap Snap</Span>
       </Heading>
-      <Subtitle>
-        Sample snap for Sending Atom
-      </Subtitle>
+      <Subtitle>Sample snap for Sending Atom</Subtitle>
       <CardContainer>
         {state.error && (
           <ErrorMessage>
@@ -213,32 +229,30 @@ const Index = () => {
             disabled={!state.installedSnap}
           />
         )} */}
-        {
-          state.isFlask &&
+        {state.isFlask &&
           Boolean(state.installedSnap) &&
-          shouldDisplayReconnectButton(state.installedSnap) &&
+          shouldDisplayReconnectButton(state.installedSnap) && (
+            <Card
+              content={{
+                title: 'Send 0.005 Atom',
+                description:
+                  'We will send 0.005 Atom via metamask snap to cosmos19vf5mfr40awvkefw69nl6p3mmlsnacmm28xyqh',
+                button: (
+                  <SendHelloButton
+                    onClick={handleSendHelloClick}
+                    disabled={!state.installedSnap}
+                  />
+                ),
+              }}
+              disabled={!state.installedSnap}
+              fullWidth={
+                state.isFlask &&
+                Boolean(state.installedSnap) &&
+                shouldDisplayReconnectButton(state.installedSnap)
+              }
+            />
+          )}
 
-          <Card
-          content={{
-            title: 'Send 0.005 Atom',
-            description:
-              'We will send 0.005 Atom via metamask snap to cosmos19vf5mfr40awvkefw69nl6p3mmlsnacmm28xyqh',
-            button: (
-              <SendHelloButton
-                onClick={handleSendHelloClick}
-                disabled={!state.installedSnap}
-              />
-            ),
-          }}
-          disabled={!state.installedSnap}
-          fullWidth={
-            state.isFlask &&
-            Boolean(state.installedSnap) &&
-            shouldDisplayReconnectButton(state.installedSnap)
-          }
-        />
-        }
-        
         {/* <Notice>
           <p>
             Please note that the <b>snap.manifest.json</b> and{' '}
@@ -252,4 +266,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Page;

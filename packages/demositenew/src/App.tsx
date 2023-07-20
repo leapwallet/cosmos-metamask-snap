@@ -1,12 +1,20 @@
+import React from 'react';
 import { createContext, FunctionComponent, ReactNode, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { getThemePreference, setLocalStorage } from './utils';
-import { dark, light } from './config/theme';
+import { light, dark, GlobalStyle } from './config/theme';
 import { MetaMaskProvider } from './hooks';
+import styled from 'styled-components';
+import { Footer, Header } from './components';
+import Page from './pages/index';
 
-export type RootProps = {
-  children: ReactNode;
-};
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  max-width: 100vw;
+`;
 
 type ToggleTheme = () => void;
 
@@ -14,7 +22,7 @@ export const ToggleThemeContext = createContext<ToggleTheme>(
   (): void => undefined,
 );
 
-export const Root: FunctionComponent<RootProps> = ({ children }) => {
+export const App = () => {
   const [darkTheme, setDarkTheme] = useState(getThemePreference());
 
   const toggleTheme: ToggleTheme = () => {
@@ -25,7 +33,14 @@ export const Root: FunctionComponent<RootProps> = ({ children }) => {
   return (
     <ToggleThemeContext.Provider value={toggleTheme}>
       <ThemeProvider theme={darkTheme ? dark : light}>
-        <MetaMaskProvider>{children}</MetaMaskProvider>
+        <MetaMaskProvider>
+          <GlobalStyle />
+          <Wrapper>
+            <Header handleToggleClick={toggleTheme} />
+            <Page />
+            <Footer />
+          </Wrapper>
+        </MetaMaskProvider>
       </ThemeProvider>
     </ToggleThemeContext.Provider>
   );
