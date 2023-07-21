@@ -7,12 +7,12 @@
     "url": "https://github.com/MetaMask/template-snap-monorepo.git"
   },
   "source": {
-    "shasum": "2N5V398vL91wQWicyLPHcwoi0HwC1sMTnS7/n4a7GFM=",
+    "shasum": "93VJ+tMJhpw/yQKyNJPGwbbtOUkX8b9OzGwED1pMDCQ=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "images/icon.svg",
-        "packageName": "snap",
+        "packageName": "leapwallet-cosmos-snap",
         "registry": "https://registry.npmjs.org/"
       }
     }

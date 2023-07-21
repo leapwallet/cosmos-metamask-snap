@@ -1,9 +1,12 @@
 import * as secp from '@noble/secp256k1';
-
 import { sha256 } from '@noble/hashes/sha256';
 import { ripemd160 } from '@noble/hashes/ripemd160';
 import { bech32 } from 'bech32';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
+import {
+  BIP44CoinTypeNode,
+  getBIP44AddressKeyDeriver,
+} from '@metamask/key-tree';
 
 import * as base64js from 'base64-js';
 
@@ -17,6 +20,11 @@ export type StdSignature = {
   readonly signature: string;
 };
 
+/**
+ *
+ * @param pubkey
+ * @param signature
+ */
 export function encodeSecp256k1Signature(
   pubkey: Uint8Array,
   signature: Uint8Array,
@@ -33,6 +41,10 @@ export function encodeSecp256k1Signature(
   };
 }
 
+/**
+ *
+ * @param pubkey
+ */
 export function encodeSecp256k1Pubkey(pubkey: Uint8Array): Pubkey {
   if (pubkey.length !== 33 || (pubkey[0] !== 0x02 && pubkey[0] !== 0x03)) {
     throw new Error(
@@ -45,10 +57,15 @@ export function encodeSecp256k1Pubkey(pubkey: Uint8Array): Pubkey {
   };
 }
 
+/**
+ *
+ * @param obj
+ */
 export function sortObject(obj: any): any {
   if (typeof obj !== 'object' || obj === null) {
     return obj;
   }
+
   if (Array.isArray(obj)) {
     return obj.map(sortObject);
   }
@@ -62,6 +79,10 @@ export function sortObject(obj: any): any {
   return result;
 }
 
+/**
+ *
+ * @param signDoc
+ */
 export function serializeSignDoc(signDoc: SignDoc) {
   return SignDoc.encode(
     SignDoc.fromPartial({
@@ -73,9 +94,41 @@ export function serializeSignDoc(signDoc: SignDoc) {
   ).finish();
 }
 
+/**
+ *
+ * @param publicKey
+ * @param addressPrefix
+ */
 function pubkeyToAddress(publicKey: Uint8Array, addressPrefix: string) {
   const pubKeyHash = ripemd160(sha256(publicKey));
   return bech32.encode(addressPrefix, bech32.toWords(pubKeyHash));
+}
+
+export type WalletOptions = {
+  addressPrefix: string;
+};
+
+/**
+ *
+ * @param options
+ */
+export async function generateWallet(options: WalletOptions): Promise<Wallet> {
+  const atomNodeJson = (await snap.request({
+    method: 'snap_getBip44Entropy',
+    params: {
+      coinType: 118,
+    },
+  })) as unknown as BIP44CoinTypeNode;
+
+  const addressKeyDeriver = await getBIP44AddressKeyDeriver(atomNodeJson);
+  const addressKey0 = await addressKeyDeriver(0);
+
+  if (addressKey0.privateKey) {
+    return Wallet.create(addressKey0.privateKey, options.addressPrefix);
+  }
+  throw new Error(
+    `Error in creating wallet for chain ${options.addressPrefix}`,
+  );
 }
 
 export class Wallet {
@@ -121,7 +174,7 @@ export class Wallet {
     });
 
     return {
-      signed: signDoc,
+      signed: { ...signDoc, accountNumber: signDoc.accountNumber.toString() },
       signature: encodeSecp256k1Signature(account.pubkey, signature),
     };
   }
