@@ -2181,6 +2181,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.33.0
     base64-js: ^1.5.1
     bech32: ^2.0.0
+    bignumber.js: ^9.1.1
     cosmjs-types: ^0.8.0
     eslint: ^8.21.0
     eslint-config-prettier: ^8.1.0
@@ -3515,6 +3516,13 @@ __metadata:
   version: 1.6.51
   resolution: "big-integer@npm:1.6.51"
   checksum: 3d444173d1b2e20747e2c175568bedeebd8315b0637ea95d75fd27830d3b8e8ba36c6af40374f36bdaea7b5de376dcada1b07587cb2a79a928fccdb6e6e3c518
+  languageName: node
+  linkType: hard
+
+"bignumber.js@npm:^9.1.1":
+  version: 9.1.1
+  resolution: "bignumber.js@npm:9.1.1"
+  checksum: ad243b7e2f9120b112d670bb3d674128f0bd2ca1745b0a6c9df0433bd2c0252c43e6315d944c2ac07b4c639e7496b425e46842773cf89c6a2dcd4f31e5c4b11e
   languageName: node
   linkType: hard
 
