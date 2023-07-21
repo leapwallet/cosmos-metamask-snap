@@ -27,7 +27,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
   switch (request.method) {
     case 'signDirect': {
       const params: RequestParams = request.params as unknown as RequestParams;
-      const panels = parser.parse(params.signDoc);
+      const panels = parser.parse(params.signDoc, origin);
       const confirmed = await snap.request({
         method: 'snap_dialog',
         params: {

@@ -4,15 +4,15 @@
   "proposedName": "Leap Wallet",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+    "url": "https://github.com/leapwallet/cosmos-metamask-snap.git"
   },
   "source": {
-    "shasum": "EknAMvbaMvpOeG33eyqKx2ZMMbSDY6CF3MD0TaV78FY=",
+    "shasum": "e6mwxxKvmO4S31gCigKXTRxyvtQcVoFustF17umxbF8=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "images/icon.svg",
-        "packageName": "leapwallet-cosmos-snap",
+        "packageName": "@leapwallet/metamask-cosmos-snap",
         "registry": "https://registry.npmjs.org/"
       }
     }

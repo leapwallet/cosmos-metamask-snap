@@ -1,3 +1,8 @@
+/* eslint-disable jsdoc/require-param-description */
+/* eslint-disable @typescript-eslint/no-parameter-properties */
+/* eslint-disable jsdoc/require-description */
+/* eslint-disable jsdoc/require-returns */
+
 import * as secp from '@noble/secp256k1';
 import { sha256 } from '@noble/hashes/sha256';
 import { ripemd160 } from '@noble/hashes/ripemd160';
@@ -108,6 +113,53 @@ export type WalletOptions = {
   addressPrefix: string;
 };
 
+export class Wallet {
+  constructor(
+    private privateKey: Uint8Array,
+    private pubkey: Uint8Array,
+    private address: string,
+  ) {}
+
+  static create(privateKey: string, addressPrefix: string) {
+    const sanitizedPvtKey = privateKey.replace('0x', '');
+    const pvtKeyBytes = Buffer.from(sanitizedPvtKey, 'hex');
+
+    const publicKey = secp.getPublicKey(pvtKeyBytes, true);
+    const pubAddress = pubkeyToAddress(publicKey, addressPrefix);
+    return new Wallet(pvtKeyBytes, publicKey, pubAddress);
+  }
+
+  getAccounts() {
+    return [
+      {
+        address: this.address,
+        algo: 'secp256k1',
+        pubkey: this.pubkey,
+      },
+    ];
+  }
+
+  async signDirect(signerAddress: string, signDoc: SignDoc) {
+    const accounts = this.getAccounts();
+    const account = accounts.find((acc) => acc.address === signerAddress);
+
+    if (!account) {
+      throw new Error('Signer address does not match wallet address');
+    }
+    const hash = sha256(serializeSignDoc(signDoc));
+    const signature = await secp.sign(hash, this.privateKey, {
+      canonical: true,
+      extraEntropy: true,
+      der: false,
+    });
+
+    return {
+      signed: { ...signDoc, accountNumber: signDoc.accountNumber.toString() },
+      signature: encodeSecp256k1Signature(account.pubkey, signature),
+    };
+  }
+}
+
 /**
  *
  * @param options
@@ -129,53 +181,4 @@ export async function generateWallet(options: WalletOptions): Promise<Wallet> {
   throw new Error(
     `Error in creating wallet for chain ${options.addressPrefix}`,
   );
-}
-
-export class Wallet {
-  constructor(
-    private privateKey: Uint8Array,
-    private pubkey: Uint8Array,
-    private address: string,
-  ) {}
-
-  static create(privateKey: string, addressPrefix: string) {
-    const sanitizedPvtKey = privateKey.replace('0x', '');
-    const pvtKeyBytes = Buffer.from(sanitizedPvtKey, 'hex');
-
-    const publicKey = secp.getPublicKey(pvtKeyBytes, true);
-    const address = pubkeyToAddress(publicKey!, addressPrefix);
-    return new Wallet(pvtKeyBytes, publicKey, address);
-  }
-
-  getAccounts() {
-    return [
-      {
-        address: this.address,
-        algo: 'secp256k1',
-        pubkey: this.pubkey,
-      },
-    ];
-  }
-
-  async signDirect(signerAddress: string, signDoc: SignDoc) {
-    const accounts = this.getAccounts();
-    const account = accounts.find(
-      (account) => account.address === signerAddress,
-    );
-
-    if (!account) {
-      throw new Error('Signer address does not match wallet address');
-    }
-    const hash = sha256(serializeSignDoc(signDoc));
-    const signature = await secp.sign(hash, this.privateKey, {
-      canonical: true,
-      extraEntropy: true,
-      der: false,
-    });
-
-    return {
-      signed: { ...signDoc, accountNumber: signDoc.accountNumber.toString() },
-      signature: encodeSecp256k1Signature(account.pubkey, signature),
-    };
-  }
 }

@@ -7,6 +7,7 @@ plugins:
 yarnPath: .yarn/releases/yarn-3.2.1.cjs
 
 npmScopes:
-  leapwallet: 
-    npmRegistryServer: "https://npm.pkg.github.com"
+  leapwallet:
+    npmRegistryServer: 'https://npm.pkg.github.com'
     npmAlwaysAuth: true
+    npmAuthToken: YOU_GITHUB_TOKEN

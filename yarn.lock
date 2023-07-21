@@ -2133,6 +2133,73 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@leapwallet/cosmos-metamask@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@leapwallet/cosmos-metamask@workspace:."
+  dependencies:
+    "@metamask/eslint-config": ^10.0.0
+    "@metamask/eslint-config-jest": ^10.0.0
+    "@metamask/eslint-config-nodejs": ^10.0.0
+    "@metamask/eslint-config-typescript": ^10.0.0
+    "@typescript-eslint/eslint-plugin": ^5.33.0
+    "@typescript-eslint/parser": ^5.33.0
+    eslint: ^8.21.0
+    eslint-config-prettier: ^8.1.0
+    eslint-plugin-import: ^2.26.0
+    eslint-plugin-jest: ^26.8.2
+    eslint-plugin-jsdoc: ^39.2.9
+    eslint-plugin-node: ^11.1.0
+    eslint-plugin-prettier: ^4.2.1
+    patch-package: ^7.0.0
+    postinstall-postinstall: ^2.1.0
+    prettier: ^2.2.1
+    prettier-plugin-packagejson: ^2.2.18
+    typescript: ^4.7.4
+  languageName: unknown
+  linkType: soft
+
+"@leapwallet/metamask-cosmos-snap@workspace:packages/snap":
+  version: 0.0.0-use.local
+  resolution: "@leapwallet/metamask-cosmos-snap@workspace:packages/snap"
+  dependencies:
+    "@cosmjs/stargate": ^0.30.1
+    "@lavamoat/allow-scripts": ^2.0.3
+    "@leapwallet/buffer-boba": ^0.1.4
+    "@leapwallet/parser-parfait": ^0.6.2
+    "@metamask/auto-changelog": ^2.6.0
+    "@metamask/eslint-config": ^10.0.0
+    "@metamask/eslint-config-jest": ^10.0.0
+    "@metamask/eslint-config-nodejs": ^10.0.0
+    "@metamask/eslint-config-typescript": ^10.0.0
+    "@metamask/key-tree": ^9.0.0
+    "@metamask/snaps-cli": ^0.32.2
+    "@metamask/snaps-types": ^0.32.2
+    "@metamask/snaps-ui": ^0.32.2
+    "@noble/hashes": ^1.3.1
+    "@noble/secp256k1": 1.7.0
+    "@typescript-eslint/eslint-plugin": ^5.33.0
+    "@typescript-eslint/parser": ^5.33.0
+    base64-js: ^1.5.1
+    bech32: ^2.0.0
+    cosmjs-types: ^0.8.0
+    eslint: ^8.21.0
+    eslint-config-prettier: ^8.1.0
+    eslint-plugin-import: ^2.26.0
+    eslint-plugin-jest: ^26.8.2
+    eslint-plugin-jsdoc: ^39.2.9
+    eslint-plugin-node: ^11.1.0
+    eslint-plugin-prettier: ^4.2.1
+    long: ^5.2.3
+    patch-package: ^7.0.0
+    postinstall-postinstall: ^2.1.0
+    prettier: ^2.2.1
+    prettier-plugin-packagejson: ^2.2.11
+    rimraf: ^3.0.2
+    through2: ^4.0.2
+    typescript: ^4.7.4
+  languageName: unknown
+  linkType: soft
+
 "@leapwallet/parser-parfait@npm:^0.6.2":
   version: 0.6.2
   resolution: "@leapwallet/parser-parfait@npm:0.6.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40leapwallet%2Fparser-parfait%2F0.6.2%2Fdcbc1db0f7e67ae1f5e10e266a147de70d413f92"
@@ -2473,31 +2540,6 @@ __metadata:
   checksum: 3568fb79cff8283eacb6e1bd498e20191f2c7c6774675be372f5305a4b5275512d1ded2a9fb36c106a8b10c5cbf480f6a87cdacfc70baf642b9bf3094ee3aefa
   languageName: node
   linkType: hard
-
-"@metamask/template-snap-monorepo@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@metamask/template-snap-monorepo@workspace:."
-  dependencies:
-    "@metamask/eslint-config": ^10.0.0
-    "@metamask/eslint-config-jest": ^10.0.0
-    "@metamask/eslint-config-nodejs": ^10.0.0
-    "@metamask/eslint-config-typescript": ^10.0.0
-    "@typescript-eslint/eslint-plugin": ^5.33.0
-    "@typescript-eslint/parser": ^5.33.0
-    eslint: ^8.21.0
-    eslint-config-prettier: ^8.1.0
-    eslint-plugin-import: ^2.26.0
-    eslint-plugin-jest: ^26.8.2
-    eslint-plugin-jsdoc: ^39.2.9
-    eslint-plugin-node: ^11.1.0
-    eslint-plugin-prettier: ^4.2.1
-    patch-package: ^7.0.0
-    postinstall-postinstall: ^2.1.0
-    prettier: ^2.2.1
-    prettier-plugin-packagejson: ^2.2.18
-    typescript: ^4.7.4
-  languageName: unknown
-  linkType: soft
 
 "@metamask/types@npm:^1.1.0":
   version: 1.1.0
@@ -4481,9 +4523,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.431":
-  version: 1.4.466
-  resolution: "electron-to-chromium@npm:1.4.466"
-  checksum: 695af573f8642ed86db6e291b1c102083b1306fff7566b9d8e90bab04f7f330a9073a0487013fa21772625d60d9e2eb193a0518a6e80ef20ece20be8f3cd6e50
+  version: 1.4.467
+  resolution: "electron-to-chromium@npm:1.4.467"
+  checksum: 0ad9e61429991c5e384acde495f06ad9f718b2f7bd00321abc5a8c92d9a8d2fdc2915cbffb7ba7395389f2102f1d42341b3d4a80ce446ed312c8adfc5a7eac4a
   languageName: node
   linkType: hard
 
@@ -6301,48 +6343,6 @@ __metadata:
   checksum: 4f7097b7666cd6d110f2a700f2905f703aa2a6d21c76fb390fcf441f436b269f5b1ad813178af4406cf6ddf01f3ac24435b3ff8fe2d9678664c147bf92f056b3
   languageName: node
   linkType: hard
-
-"leapwallet-cosmos-snap@workspace:packages/snap":
-  version: 0.0.0-use.local
-  resolution: "leapwallet-cosmos-snap@workspace:packages/snap"
-  dependencies:
-    "@cosmjs/stargate": ^0.30.1
-    "@lavamoat/allow-scripts": ^2.0.3
-    "@leapwallet/buffer-boba": ^0.1.4
-    "@leapwallet/parser-parfait": ^0.6.2
-    "@metamask/auto-changelog": ^2.6.0
-    "@metamask/eslint-config": ^10.0.0
-    "@metamask/eslint-config-jest": ^10.0.0
-    "@metamask/eslint-config-nodejs": ^10.0.0
-    "@metamask/eslint-config-typescript": ^10.0.0
-    "@metamask/key-tree": ^9.0.0
-    "@metamask/snaps-cli": ^0.32.2
-    "@metamask/snaps-types": ^0.32.2
-    "@metamask/snaps-ui": ^0.32.2
-    "@noble/hashes": ^1.3.1
-    "@noble/secp256k1": 1.7.0
-    "@typescript-eslint/eslint-plugin": ^5.33.0
-    "@typescript-eslint/parser": ^5.33.0
-    base64-js: ^1.5.1
-    bech32: ^2.0.0
-    cosmjs-types: ^0.8.0
-    eslint: ^8.21.0
-    eslint-config-prettier: ^8.1.0
-    eslint-plugin-import: ^2.26.0
-    eslint-plugin-jest: ^26.8.2
-    eslint-plugin-jsdoc: ^39.2.9
-    eslint-plugin-node: ^11.1.0
-    eslint-plugin-prettier: ^4.2.1
-    long: ^5.2.3
-    patch-package: ^7.0.0
-    postinstall-postinstall: ^2.1.0
-    prettier: ^2.2.1
-    prettier-plugin-packagejson: ^2.2.11
-    rimraf: ^3.0.2
-    through2: ^4.0.2
-    typescript: ^4.7.4
-  languageName: unknown
-  linkType: soft
 
 "levn@npm:^0.4.1":
   version: 0.4.1
