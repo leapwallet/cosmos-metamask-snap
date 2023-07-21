@@ -141,14 +141,14 @@ const Page = () => {
 
   const handleSendHelloClick = async () => {
     try {
-      const rpcUrl = 'https://rpc.cosmos.directory/osmosis';
-      const senderAddress = 'osmo19vf5mfr40awvkefw69nl6p3mmlsnacmmzu45k9';
-      const recipientAddress = 'osmo1nhzcr7mrqedyy5gcnkwz38yc0jk9z7y7avzpju';
-      const amount = coin('1000', 'uosmo');
+      const rpcUrl = 'https://rpc.cosmos.directory/cosmoshub';
+      const senderAddress = 'cosmos19vf5mfr40awvkefw69nl6p3mmlsnacmm28xyqh';
+      const recipientAddress = 'cosmos1nhzcr7mrqedyy5gcnkwz38yc0jk9z7y74h33yw';
+      const amount = coin('1000', 'uatom');
       const memo = 'Hello from Leap Snap';
-      const gasPrice = GasPrice.fromString('0.025uosmo');
+      const gasPrice = GasPrice.fromString('0.025uatom');
       const fee = calculateFee(100_000, gasPrice);
-      const offlineSigner = getOfflineSigner('osmosis-1');
+      const offlineSigner = getOfflineSigner('cosmoshub-4');
       const tx = await Tx.create(rpcUrl, offlineSigner);
       const txResponse = await tx.sendTokens(
         senderAddress,

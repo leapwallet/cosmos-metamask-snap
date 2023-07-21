@@ -6,8 +6,9 @@ import {
 import { panel, text, heading } from '@metamask/snaps-ui';
 import { calculateFee, SigningStargateClient } from '@cosmjs/stargate';
 import { OfflineDirectSigner } from '@cosmjs/proto-signing';
-import { SignDoc, TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
-import { sha256 } from '@noble/hashes/sha256';
+import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
+import Long from 'long';
+
 import { BigNumber } from 'bignumber.js';
 import parser from './helpers/parser';
 import { Wallet } from './wallet/wallet';
@@ -68,18 +69,26 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       });
       if (!confirmed) throw new Error('User denied transaction');
       const wallet = await generateWallet({
-        addressPrefix: 'osmo',
+        addressPrefix: 'cosmos',
         hdPaths: ["m/44'/118'/0'/0/0"],
       });
 
       const { signerAddress, signDoc } = request.params;
-      console.log('logging signdoc', signDoc);
-      const signResponse = await wallet.signDirect(signerAddress, signDoc);
+      const { low, high, unsigned } = signDoc.accountNumber;
+
+      const accountNumber = new Long(low, high, unsigned);
+      const sd = {
+        bodyBytes: new Uint8Array(Object.values(signDoc.bodyBytes)),
+        authInfoBytes: new Uint8Array(Object.values(signDoc.authInfoBytes)),
+        chainId: signDoc.chainId,
+        accountNumber: accountNumber.toString(),
+      };
+      const signResponse = await wallet.signDirect(signerAddress, sd);
       return signResponse;
     }
     case 'getKey': {
       const wallet = await generateWallet({
-        addressPrefix: 'osmo',
+        addressPrefix: 'cosmos',
         paths: ["m/44'/118'/0'/0/0"],
       });
       const accounts = wallet.getAccounts();
