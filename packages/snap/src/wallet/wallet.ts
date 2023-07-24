@@ -14,6 +14,7 @@ import {
 } from '@metamask/key-tree';
 
 import * as base64js from 'base64-js';
+import { StdSignDoc } from '@cosmjs/amino';
 
 export type Pubkey = {
   readonly type: string;
@@ -99,6 +100,11 @@ export function serializeSignDoc(signDoc: SignDoc) {
   ).finish();
 }
 
+export function serializeStdSignDoc(signDoc: StdSignDoc) {
+  const json = JSON.stringify(sortObject(signDoc));
+  return new TextEncoder().encode(json);
+}
+
 /**
  *
  * @param publicKey
@@ -155,6 +161,29 @@ export class Wallet {
 
     return {
       signed: { ...signDoc, accountNumber: signDoc.accountNumber.toString() },
+      signature: encodeSecp256k1Signature(account.pubkey, signature),
+    };
+  }
+
+  async signAmino(signerAddress: string, signDoc: StdSignDoc) {
+    const accounts = this.getAccounts();
+    const account = accounts.find(
+      (account) => account.address === signerAddress,
+    );
+    if (!account) {
+      throw new Error('Signer address does not match wallet address');
+    }
+    if (!account.pubkey) {
+      throw new Error('Unable to derive keypair');
+    }
+    const hash = sha256(serializeStdSignDoc(signDoc));
+
+    const signature = await secp.sign(hash, this.privateKey, {
+      canonical: true,
+    });
+
+    return {
+      signed: signDoc,
       signature: encodeSecp256k1Signature(account.pubkey, signature),
     };
   }

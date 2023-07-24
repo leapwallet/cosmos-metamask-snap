@@ -1,14 +1,17 @@
+import { StdSignDoc } from '@cosmjs/amino';
 import { OnRpcRequestHandler } from '@metamask/snaps-types';
 import { panel } from '@metamask/snaps-ui';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import Long from 'long';
+import { AddressPrefixes } from './helpers/addressPrefixes';
 import parser from './helpers/parser';
+import { validateChainId } from './helpers/validateChainId';
 import { generateWallet } from './wallet/wallet';
 
-type RequestParams = {
-  signDoc: SignDoc;
-  signerAddress: string;
-};
+interface RequestParams<T> {
+  readonly signDoc: T;
+  readonly signerAddress: string;
+}
 
 /**
  * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
@@ -26,7 +29,8 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 }) => {
   switch (request.method) {
     case 'signDirect': {
-      const params: RequestParams = request.params as unknown as RequestParams;
+      const params: RequestParams<SignDoc> =
+        request.params as unknown as RequestParams<SignDoc>;
       const panels = parser.parse(params.signDoc, origin);
       const confirmed = await snap.request({
         method: 'snap_dialog',
@@ -39,12 +43,14 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       if (!confirmed) {
         throw new Error('User denied transaction');
       }
-      const wallet = await generateWallet({
-        addressPrefix: 'cosmos',
-      });
 
       const { signerAddress, signDoc } = params;
+      validateChainId(signDoc.chainId);
       const { low, high, unsigned } = signDoc.accountNumber;
+
+      const wallet = await generateWallet({
+        addressPrefix: AddressPrefixes[signDoc.chainId],
+      });
 
       const accountNumber = new Long(low, high, unsigned);
       const sd = {
@@ -57,9 +63,53 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       return signResponse;
     }
 
-    case 'getKey': {
+    case 'signAmino': {
+      const params: RequestParams<StdSignDoc> =
+        request.params as unknown as RequestParams<StdSignDoc>;
+      const panels = parser.parse(params.signDoc, origin);
+      const confirmed = await snap.request({
+        method: 'snap_dialog',
+        params: {
+          type: 'confirmation',
+          content: panel(panels),
+        },
+      });
+      if (!confirmed) {
+        throw new Error('User denied transaction');
+      }
+
+      const { signerAddress, signDoc } = params;
+
+      //@ts-ignore
+      validateChainId(signDoc.chain_id ?? signDoc.chainId);
       const wallet = await generateWallet({
-        addressPrefix: 'cosmos',
+        //@ts-ignore
+        addressPrefix: AddressPrefixes[signDoc.chain_id ?? signDoc.chainId],
+      });
+
+      const defaultFee = signDoc.fee;
+      const defaultMemo = signDoc.memo;
+
+      const sortedSignDoc = {
+        //@ts-ignore
+        chain_id: signDoc.chain_id ?? signDoc.chainId,
+        //@ts-ignore
+        account_number: signDoc.account_number ?? signDoc.accountNumber,
+        sequence: signDoc.sequence,
+        fee: defaultFee,
+        memo: defaultMemo,
+        msgs: signDoc.msgs,
+      };
+      const signResponse = await wallet.signAmino(signerAddress, sortedSignDoc);
+      return signResponse;
+    }
+
+    case 'getKey': {
+      const { chainId } = request.params as { chainId: string };
+      validateChainId(chainId);
+
+      const wallet = await generateWallet({
+        addressPrefix: AddressPrefixes[chainId],
       });
 
       const accounts = wallet.getAccounts();
