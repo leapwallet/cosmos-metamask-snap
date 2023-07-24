@@ -1,8 +1,43 @@
-# TypeScript Example Snap
+# LeapWallet - Metamask Cosmos Snap
 
-This Snap demonstrates how to develop a Snap with TypeScript.
+This Snap helps you to sign cosmos transactions for the chains of coin type 118
 
-## Notes
 
-- Babel is used for transpiling TypeScript to JavaScript, so when building with the CLI,
-  `transpilationMode` must be set to `localOnly` (default) or `localAndDeps`.
+## Snap name
+
+```
+@leapwallet/metamask-cosmos-snap
+```
+
+## Installation
+
+To connect or to install and connect to leapwallet's metamask-cosmos-snap. Use the below command
+
+```javascript
+try {
+  const result = await window.ethereum.request({
+    method: 'wallet_requestSnaps',
+    params: {
+      'npm:@leapwallet-metamas-snap': {},
+    },
+  });
+
+  console.log(result);
+
+} catch (error) {
+  console.log(error);
+}
+```
+
+for more information about installing / connecting to a metamask snap check [here](https://docs.metamask.io/snaps/reference/rpc-api/#wallet_requestsnaps)
+
+## Get Keys
+
+
+
+## Sign Amino
+
+
+## Sign Direct
+
+
