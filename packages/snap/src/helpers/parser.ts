@@ -1,4 +1,4 @@
-import { text, heading } from '@metamask/snaps-ui';
+import { text, heading, divider } from '@metamask/snaps-ui';
 import {
   MessageParser,
   parfait,
@@ -13,6 +13,7 @@ import {
 } from '@leapwallet/buffer-boba';
 
 import BigNumber from 'bignumber.js'
+import DENOMS from '../constants/denoms';
 
 const messageParser = new MessageParser();
 
@@ -48,11 +49,21 @@ export const formatBigNumber = (n: BigNumber) => {
   }
 
 const tokenToString = (token: Token) => {
-    if (token?.denomination?.startsWith('u') ?? false) {
-        return `${token.quantity} ${token.denomination.slice(1)}`
-      }
-      return `${token?.quantity ?? ''} ${sliceAddress(token?.denomination ?? '')}`
-  }
+    try {
+        const trace = DENOMS[token.denomination as keyof typeof DENOMS]
+        if (!trace) {
+          throw new Error('No')
+        }
+        return `${formatBigNumber(new BigNumber(token.quantity).dividedBy(10 ** trace.coinDecimals))} ${
+          trace.coinDenom
+        }`
+      } catch {
+        if (token?.denomination?.startsWith('u') ?? false) {
+          return `${token.quantity} ${token.denomination.slice(1)}`
+        }
+        return `${token?.quantity ?? ''} ${sliceAddress(token?.denomination ?? '')}`
+    }
+}
 
 export const getSimpleType = (type: string | undefined) => {
     if (!type) {
@@ -297,13 +308,14 @@ const parser = {
       };
     });
 
-    const panels: any = [heading('Approve Transaction from'), text(origin), heading("Transaction summary")];
+    const panels: any = [text(` **Approve Transaction**`), divider(), text(`Origin: _${origin}_`), heading(''), text(" **Transaction Summary**")];
     parsedMessages.forEach((msg) => {
-        return panels.push(text(` **${getMessageDetails(msg.parsed)}** `));
+        return panels.push(heading(`${getMessageDetails(msg.parsed)}`));
     })
 
     if (parsedMessages) {
-      panels.push(heading('Raw Message'));
+      panels.push(heading(''))
+      panels.push(text(' **Raw Message**'));
       panels.push(text(`${JSON.stringify(parsedMessages, null, 2)}`));
     }
     return panels;

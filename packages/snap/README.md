@@ -3,7 +3,6 @@
 This Snap helps you to sign cosmos transactions for the chains of coin type 118
 
 
-## Snap name
 
 ```
 @leapwallet/metamask-cosmos-snap
@@ -18,7 +17,7 @@ try {
   const result = await window.ethereum.request({
     method: 'wallet_requestSnaps',
     params: {
-      'npm:@leapwallet-metamas-snap': {},
+      'npm:@leapwallet-metamask-snap': {},
     },
   });
 
@@ -39,5 +38,4 @@ for more information about installing / connecting to a metamask snap check [her
 
 
 ## Sign Direct
-
 

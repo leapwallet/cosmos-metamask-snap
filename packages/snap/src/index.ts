@@ -72,6 +72,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
         pubkey: new Uint8Array(Object.values(accounts[0].pubkey)),
       };
     }
+    
     default:
       throw new Error('Method not found.');
   }

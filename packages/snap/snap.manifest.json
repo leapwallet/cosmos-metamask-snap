@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Leap wallet sample snap",
   "proposedName": "Leap Wallet",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/leapwallet/cosmos-metamask-snap.git"
   },
   "source": {
-    "shasum": "9EeO5+1+eE7zUniDBU/5VM9ww6C1EsP8pE2pvYQZCks=",
+    "shasum": "b9CiQLX6b84Vper+8oXxU1Ex7saKvMZ3vfcfJNSYShQ=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
