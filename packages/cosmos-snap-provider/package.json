@@ -1,0 +1,18 @@
+{
+  "name": "@leapwallet/cosmos-snap-provider",
+  "packageManager": "yarn@3.2.1",
+  "files": [
+    "dist/**/*"
+  ],
+  "repository": {
+    "url": "git@github.com:leapwallet/cosmos-metamask-snap.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "build": "npx tsc",
+    "start": "npx tsc watch",
+    "prepublish": "yarn build"
+  }
+}
