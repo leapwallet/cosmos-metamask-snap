@@ -3,6 +3,7 @@ dist/
 build/
 coverage/
 .cache/
+dist/
 
 # Logs
 logs

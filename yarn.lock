@@ -2158,6 +2158,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@leapwallet/cosmos-snap-provider@workspace:packages/cosmos-snap-provider":
+  version: 0.0.0-use.local
+  resolution: "@leapwallet/cosmos-snap-provider@workspace:packages/cosmos-snap-provider"
+  languageName: unknown
+  linkType: soft
+
 "@leapwallet/metamask-cosmos-snap@workspace:packages/snap":
   version: 0.0.0-use.local
   resolution: "@leapwallet/metamask-cosmos-snap@workspace:packages/snap"
