@@ -59,7 +59,7 @@ Sign direct would be used to sign any transactions / signDoc using the wallet wh
 await window.ethereum.request({
     method: 'wallet_invokeSnap',
     params: {
-      snapId: defaultSnapOrigin,
+      snapId: "npm:@leapwallet-metamask-snap",
       request: {
         method: 'signDirect',
         params: {
