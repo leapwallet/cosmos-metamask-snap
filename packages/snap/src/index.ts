@@ -23,7 +23,7 @@ interface RequestParams<T> {
  * @returns The result of `snap_dialog`.
  * @throws If the request method is not valid for this snap.
  */
-export const onRpcRequest: OnRpcRequestHandler = async ({
+const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
   request,
 }) => {
@@ -122,8 +122,11 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
         pubkey: new Uint8Array(Object.values(accounts[0].pubkey)),
       };
     }
-    
+
     default:
       throw new Error('Method not found.');
   }
 };
+
+
+export default onRpcRequest;
