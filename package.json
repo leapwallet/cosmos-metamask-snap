@@ -23,8 +23,14 @@
     "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
     "lint:misc": "prettier '**/*.json' '**/*.md' '!**/CHANGELOG.md' '**/*.yml' --ignore-path .gitignore",
     "start": "yarn workspaces foreach --parallel --interlaced --verbose run start",
+<<<<<<< HEAD
     "test": "echo \"TODO\"",
     "start:snap": "yarn workspace snap start"
+=======
+    "start:snap": "yarn workspace snap start",
+    "build:provider": "yarn workspace @leapwallet/cosmos-snap-provider build",
+    "test": "echo \"TODO\""
+>>>>>>> 3e3664dc213ea80bd2f889120f3e661c7cadf1d5
   },
   "devDependencies": {
     "@metamask/eslint-config": "^10.0.0",
