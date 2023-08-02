@@ -21,33 +21,6 @@ export const sliceAddress = (address?: string, visibleLetters = 5) => {
     return address?.slice(0, visibleLetters) + '...' + address?.slice(address.length - visibleLetters, address.length);
 };
 
-const tokensToString = (tokens: Token[]) => {
-    const traces = tokens.map((t) => tokenToString(t))
-    return traces.join(', ')
-  }
-
-export const formatBigNumber = (n: BigNumber) => {
-    if (isNaN(n?.toNumber())) {
-      return '-';
-    }
-    if (n.lt(0.01) && !n.eq(0)) {
-      return `<0.01`;
-    } else {
-      return n.toFixed(2);
-    }
-  };
-
-  const formatAllowanceOption = (allowance: parfait.cosmos.feegrant.grantAllowance['allowance']) => {
-    switch (allowance) {
-      case 'basic':
-        return 'Basic'
-      case 'periodic':
-        return 'Periodic'
-      case 'allowedMsg':
-        return 'Allowed Message'
-    }
-  }
-
 const tokenToString = (token: Token) => {
     try {
         const trace = DENOMS[token.denomination as keyof typeof DENOMS]
@@ -65,13 +38,42 @@ const tokenToString = (token: Token) => {
     }
 }
 
+const tokensToString = (tokens: Token[]) => {
+    const traces = tokens.map((t) => tokenToString(t))
+    return traces.join(', ')
+}
+
+export const formatBigNumber = (n: BigNumber) => {
+    if (isNaN(n?.toNumber())) {
+      return '-';
+    }
+    if (n.lt(0.01) && !n.eq(0)) {
+      return `<0.01`;
+    } else {
+      return n.toFixed(2);
+    }
+};
+
+const formatAllowanceOption = (allowance: parfait.cosmos.feegrant.grantAllowance['allowance']) => {
+    switch (allowance) {
+      case 'basic':
+        return 'Basic'
+      case 'periodic':
+        return 'Periodic'
+      case 'allowedMsg':
+        return 'Allowed Message'
+      default:
+        return ''
+    }
+}
+
 export const getSimpleType = (type: string | undefined) => {
     if (!type) {
       return 'unknown'
     }
     const parts = (type?.startsWith('/') ? type?.split('.') : type?.split('/')) ?? []
     return parts[parts.length - 1] ?? ''
-  }
+}
 
 export const getMessageDetails = (
     message: ParsedMessage,
