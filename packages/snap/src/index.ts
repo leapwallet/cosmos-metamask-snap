@@ -8,7 +8,7 @@ import parser from './helpers/parser';
 import { validateChainId } from './helpers/validateChainId';
 import { generateWallet } from './wallet/wallet';
 
-interface RequestParams<T> {
+export interface RequestParams<T> {
   readonly signDoc: T;
   readonly signerAddress: string;
 }
@@ -23,7 +23,7 @@ interface RequestParams<T> {
  * @returns The result of `snap_dialog`.
  * @throws If the request method is not valid for this snap.
  */
-const onRpcRequest: OnRpcRequestHandler = async ({
+export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
   request,
 }) => {
@@ -127,6 +127,3 @@ const onRpcRequest: OnRpcRequestHandler = async ({
       throw new Error('Method not found.');
   }
 };
-
-
-export default onRpcRequest;
