@@ -8,7 +8,7 @@ import parser from './helpers/parser';
 import { validateChainId } from './helpers/validateChainId';
 import { generateWallet } from './wallet/wallet';
 
-interface RequestParams<T> {
+export interface RequestParams<T> {
   readonly signDoc: T;
   readonly signerAddress: string;
 }
@@ -122,7 +122,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
         pubkey: new Uint8Array(Object.values(accounts[0].pubkey)),
       };
     }
-    
+
     default:
       throw new Error('Method not found.');
   }
