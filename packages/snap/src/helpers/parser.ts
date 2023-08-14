@@ -1,4 +1,4 @@
-import { text, heading, divider } from '@metamask/snaps-ui';
+import { text, heading, divider, copyable } from '@metamask/snaps-ui';
 import {
   MessageParser,
   parfait,
@@ -310,15 +310,15 @@ const parser = {
       };
     });
 
-    const panels: any = [text(` **Approve Transaction**`), divider(), text(`Origin: _${origin}_`), heading(''), text(" **Transaction Summary**")];
+    const panels: any = [text(` **Approve Transaction from**`), copyable(`${origin}`), heading('')];
     parsedMessages.forEach((msg) => {
         return panels.push(heading(`${getMessageDetails(msg.parsed)}`));
     })
 
     if (parsedMessages) {
       panels.push(heading(''))
-      panels.push(text(' **Raw Message**'));
-      panels.push(text(`${JSON.stringify(parsedMessages, null, 2)}`));
+      panels.push(text(' **Raw message**'));
+      panels.push(copyable(`${JSON.stringify(parsedMessages, null, 2)}`));
     }
     return panels;
   },
