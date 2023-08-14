@@ -310,7 +310,7 @@ const parser = {
       };
     });
 
-    const panels: any = [text(` **Approve Transaction from**`), copyable(`${origin}`), heading('')];
+    const panels: any = [text(` **Approve transaction from**`), copyable(`${origin}`), heading('')];
     parsedMessages.forEach((msg) => {
         return panels.push(heading(`${getMessageDetails(msg.parsed)}`));
     })
