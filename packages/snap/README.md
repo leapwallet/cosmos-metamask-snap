@@ -7,7 +7,7 @@
 This Snap helps you to sign cosmos transactions for the chains of coin type 118
 
 > Note:
-If you are already using Cosmos-js and are familiar with OfflineSigner, we recommend using our [cosmos-snap-provider](https://github.com/leapwallet/cosmos-metamask-snap/blob/main/packages/cosmos-snap-provider/README.md) which does all necessary handling.
+If you are already using Cosmos-js and are familiar with OfflineSigner, we recommend using our [cosmos-snap-provider](https://github.com/leapwallet/cosmos-metamask-snap/blob/main/packages/cosmos-snap-provider/README.md) which does all necessary with lesser code changes.
 
 
 ## Installation
