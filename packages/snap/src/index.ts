@@ -31,7 +31,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     case 'signDirect': {
       const params: RequestParams<SignDoc> =
         request.params as unknown as RequestParams<SignDoc>;
-      const panels = parser.parse(params.signDoc, origin);
+      const panels = parser.parse(params.signDoc, origin, 'direct');
       const confirmed = await snap.request({
         method: 'snap_dialog',
         params: {
@@ -66,7 +66,8 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     case 'signAmino': {
       const params: RequestParams<StdSignDoc> =
         request.params as unknown as RequestParams<StdSignDoc>;
-      const panels = parser.parse(params.signDoc, origin);
+      const panels = parser.parse(params.signDoc, origin, 'amino');
+
       const confirmed = await snap.request({
         method: 'snap_dialog',
         params: {

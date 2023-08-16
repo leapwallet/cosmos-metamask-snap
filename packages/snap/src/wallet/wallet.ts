@@ -180,6 +180,8 @@ export class Wallet {
 
     const signature = await secp.sign(hash, this.privateKey, {
       canonical: true,
+      extraEntropy: true,
+      der: false,
     });
 
     return {
