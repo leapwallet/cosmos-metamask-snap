@@ -100,6 +100,10 @@ export function serializeSignDoc(signDoc: SignDoc) {
   ).finish();
 }
 
+/**
+ *
+ * @param signDoc
+ */
 export function serializeStdSignDoc(signDoc: StdSignDoc) {
   const json = JSON.stringify(sortObject(signDoc));
   return new TextEncoder().encode(json);
@@ -173,6 +177,7 @@ export class Wallet {
     if (!account) {
       throw new Error('Signer address does not match wallet address');
     }
+
     if (!account.pubkey) {
       throw new Error('Unable to derive keypair');
     }

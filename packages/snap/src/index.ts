@@ -8,10 +8,10 @@ import parser from './helpers/parser';
 import { validateChainId } from './helpers/validateChainId';
 import { generateWallet } from './wallet/wallet';
 
-export interface RequestParams<T> {
+export type RequestParams<T> = {
   readonly signDoc: T;
   readonly signerAddress: string;
-}
+};
 
 /**
  * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
@@ -81,10 +81,10 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 
       const { signerAddress, signDoc } = params;
 
-      //@ts-ignore
+      // @ts-ignore
       validateChainId(signDoc.chain_id ?? signDoc.chainId);
       const wallet = await generateWallet({
-        //@ts-ignore
+        // @ts-ignore
         addressPrefix: AddressPrefixes[signDoc.chain_id ?? signDoc.chainId],
       });
 
@@ -92,9 +92,9 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       const defaultMemo = signDoc.memo;
 
       const sortedSignDoc = {
-        //@ts-ignore
+        // @ts-ignore
         chain_id: signDoc.chain_id ?? signDoc.chainId,
-        //@ts-ignore
+        // @ts-ignore
         account_number: signDoc.account_number ?? signDoc.accountNumber,
         sequence: signDoc.sequence,
         fee: defaultFee,

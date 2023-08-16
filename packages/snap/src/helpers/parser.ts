@@ -18,11 +18,10 @@ import DENOMS from '../constants/denoms';
 const messageParser = new MessageParser();
 
 export const sliceAddress = (address?: string, visibleLetters = 5) => {
-  return (
-    address?.slice(0, visibleLetters) +
-    '...' +
-    address?.slice(address.length - visibleLetters, address.length)
-  );
+  return `${address?.slice(0, visibleLetters)}...${address?.slice(
+    address.length - visibleLetters,
+    address.length,
+  )}`;
 };
 
 const tokenToString = (token: Token) => {
@@ -53,11 +52,11 @@ export const formatBigNumber = (n: BigNumber) => {
   if (isNaN(n?.toNumber())) {
     return '-';
   }
+
   if (n.lt(0.01) && !n.eq(0)) {
     return `<0.01`;
-  } else {
-    return n.toFixed(2);
   }
+  return n.toFixed(2);
 };
 
 const formatAllowanceOption = (
@@ -145,6 +144,7 @@ export const getMessageDetails = (message: ParsedMessage): string => {
         tokenOut,
       )}`;
     }
+
     case ParsedMessageType.GammSwapMax: {
       const tokenIn = {
         quantity: message.tokenInAmount,
@@ -330,17 +330,16 @@ const parser = {
         panels.push(copyable(`${JSON.stringify(parsedMessages, null, 2)}`));
       }
       return panels;
-    } else {
-      const panels: any = [
-        text(` **Approve transaction from**`),
-        copyable(`${origin}`),
-        heading(''),
-      ];
-      panels.push(heading(''));
-      panels.push(text(' **Raw message**'));
-      panels.push(copyable(`${JSON.stringify(signDoc, null, 2)}`));
-      return panels;
     }
+    const panels: any = [
+      text(` **Approve transaction from**`),
+      copyable(`${origin}`),
+      heading(''),
+    ];
+    panels.push(heading(''));
+    panels.push(text(' **Raw message**'));
+    panels.push(copyable(`${JSON.stringify(signDoc, null, 2)}`));
+    return panels;
   },
 };
 
