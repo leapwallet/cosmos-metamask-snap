@@ -8,10 +8,10 @@ import parser from './helpers/parser';
 import { validateChainId } from './helpers/validateChainId';
 import { generateWallet } from './wallet/wallet';
 
-export interface RequestParams<T> {
+export type RequestParams<T> = {
   readonly signDoc: T;
   readonly signerAddress: string;
-}
+};
 
 /**
  * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
@@ -31,7 +31,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     case 'signDirect': {
       const params: RequestParams<SignDoc> =
         request.params as unknown as RequestParams<SignDoc>;
-      const panels = parser.parse(params.signDoc, origin);
+      const panels = parser.parse(params.signDoc, origin, 'direct');
       const confirmed = await snap.request({
         method: 'snap_dialog',
         params: {
@@ -66,7 +66,8 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     case 'signAmino': {
       const params: RequestParams<StdSignDoc> =
         request.params as unknown as RequestParams<StdSignDoc>;
-      const panels = parser.parse(params.signDoc, origin);
+      const panels = parser.parse(params.signDoc, origin, 'amino');
+
       const confirmed = await snap.request({
         method: 'snap_dialog',
         params: {
@@ -80,10 +81,10 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 
       const { signerAddress, signDoc } = params;
 
-      //@ts-ignore
+      // @ts-ignore
       validateChainId(signDoc.chain_id ?? signDoc.chainId);
       const wallet = await generateWallet({
-        //@ts-ignore
+        // @ts-ignore
         addressPrefix: AddressPrefixes[signDoc.chain_id ?? signDoc.chainId],
       });
 
@@ -91,9 +92,9 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       const defaultMemo = signDoc.memo;
 
       const sortedSignDoc = {
-        //@ts-ignore
+        // @ts-ignore
         chain_id: signDoc.chain_id ?? signDoc.chainId,
-        //@ts-ignore
+        // @ts-ignore
         account_number: signDoc.account_number ?? signDoc.accountNumber,
         sequence: signDoc.sequence,
         fee: defaultFee,

@@ -1,7 +1,7 @@
 import { AccountData } from '@cosmjs/amino';
+import Long from 'long';
 import { defaultSnapOrigin } from './config';
 import { GetSnapsResponse, Snap } from './types';
-import Long from 'long';
 
 /**
  * Get the installed snaps in MetaMask.
@@ -78,8 +78,8 @@ export const requestSignature = async (
     },
   });
 
-  const accountNumber = signDoc.accountNumber;
-  //@ts-ignore
+  const { accountNumber } = signDoc;
+  // @ts-ignore
   const modifiedAccountNumber = new Long(
     accountNumber!.low,
     accountNumber!.high,
@@ -87,19 +87,19 @@ export const requestSignature = async (
   );
 
   const modifiedSignature = {
-    //@ts-ignore
+    // @ts-ignore
     signature: signature.signature,
     signed: {
       // @ts-ignore
       ...signature.signed,
       accountNumber: `${modifiedAccountNumber.toString()}`,
       authInfoBytes: new Uint8Array(
-        //@ts-ignore
+        // @ts-ignore
         Object.values(signature.signed.authInfoBytes),
       ),
 
       bodyBytes: new Uint8Array(
-        //@ts-ignore
+        // @ts-ignore
         Object.values(signature.signed.bodyBytes),
       ),
     },
@@ -123,8 +123,10 @@ export const getKey = async (chainId: string): Promise<AccountData> => {
     },
   });
 
-  if (!accountData) throw new Error('No account data found');
-  //@ts-ignore
+  if (!accountData) {
+    throw new Error('No account data found');
+  }
+  // @ts-ignore
   accountData.pubkey = Uint8Array.from(Object.values(accountData.pubkey));
 
   return accountData as AccountData;

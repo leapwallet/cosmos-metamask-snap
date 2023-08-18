@@ -100,6 +100,10 @@ export function serializeSignDoc(signDoc: SignDoc) {
   ).finish();
 }
 
+/**
+ *
+ * @param signDoc
+ */
 export function serializeStdSignDoc(signDoc: StdSignDoc) {
   const json = JSON.stringify(sortObject(signDoc));
   return new TextEncoder().encode(json);
@@ -167,12 +171,11 @@ export class Wallet {
 
   async signAmino(signerAddress: string, signDoc: StdSignDoc) {
     const accounts = this.getAccounts();
-    const account = accounts.find(
-      (account) => account.address === signerAddress,
-    );
+    const account = accounts.find((acc) => acc.address === signerAddress);
     if (!account) {
       throw new Error('Signer address does not match wallet address');
     }
+
     if (!account.pubkey) {
       throw new Error('Unable to derive keypair');
     }
@@ -180,6 +183,8 @@ export class Wallet {
 
     const signature = await secp.sign(hash, this.privateKey, {
       canonical: true,
+      extraEntropy: true,
+      der: false,
     });
 
     return {

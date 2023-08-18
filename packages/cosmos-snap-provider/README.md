@@ -1,59 +1,69 @@
-# cosmos-snap-provider
+## **cosmos-snap-provider**
 
-Cosmos Snap provider has been created for directly using the [Leap Cosmos Snap](https://www.npmjs.com/package/@leapwallet/metamask-cosmos-snap) with cosmos js client.
+The **`cosmos-snap-provider`** is specifically designed for seamless integration of the Leap Cosmos Snap with the [CosmJS](https://github.com/cosmos/cosmjs) client.
 
-## Methods
+### **Methods**
 
-### getSnap
-  This method helps to identify whether leap cosmos snap is installed or not in the metamask instance installed in user browser
+### 1. **getSnap**
 
+This method is used to detect if the Leap Cosmos Snap is installed within the user's browser instance of Metamask.
 
-```typescript
-import { getSnap, connectSnap, getKey } from '@leapwallet/cosmos-snap-provider'
-const snapInstalled = await getSnap() // return true if already installed
+**Usage:**
+
+```js
+
+import { getSnap } from '@leapwallet/cosmos-snap-provider';
+
+const snapInstalled = await getSnap(); // Returns true if the snap is already installed
 ```
 
+### 2. **connectSnap**
 
-### connectSnap
- Connect snap lets you connect to leap cosmos snap if installed else it will trigger the installation and connects to the snap.
- 
-```typescript
-import { getSnap, connectSnap, getKey } from '@leapwallet/cosmos-snap-provider'
+**`connectSnap`** facilitates the connection to the Leap Cosmos Snap. If the Snap isn't installed, this function triggers its installation and establishes a connection.
 
-// check if snap is installed
-const snapInstalled = await getSnap()
-if(!snapInstalled) {
-  // Install snap if not already installed
-  connectSnap()
+**Usage:**
+
+```js
+
+import { getSnap, connectSnap } from '@leapwallet/cosmos-snap-provider';
+
+const snapInstalled = await getSnap();
+if (!snapInstalled) {
+  connectSnap(); // Initiates installation if not already present
 }
+
 ```
 
-### getKey
-GetKey helps in getting the chain address for the particular chainId. This should be called once the snap is been connected with the dapp.
+### 3. **getKey**
 
-```typescript
-const key = await getKey(chainId)
+**`getKey`** fetches the chain address corresponding to a specific chainId. Ensure the Snap is connected with the dapp before invoking this function.
+
+```js
+const key = await getKey(chainId);
 ```
 
-### cosmjsOfflineSigner
+### 4. **cosmjsOfflineSigner**
 
-The best way to use the provider if you already using the cosmjs libraries for signing is by using it as an offline signer with existing cosmwasm clients. 
-Make sure the dapp connected to snap before using it as an offline signer.
+If you're already employing cosmjs libraries for transaction signing, **`cosmjsOfflineSigner`** is recommended. It functions as an offline signer with existing cosmwasm clients. Before utilizing it as an offline signer, verify that the dapp is connected to the Snap.
 
-```typescript
-import { SigningStargateClient } from '@cosmjs/cosmwasm-stargate'
-import { GasPrice } from '@cosmjs/stargate'
-import { cosmjsOfflineSigner } from '@leapwallet/cosmos-snap-provider'
+**Usage:**
+
+```js
+
+import { SigningStargateClient } from '@cosmjs/cosmwasm-stargate';
+import { GasPrice } from '@cosmjs/stargate';
+import { cosmjsOfflineSigner } from '@leapwallet/cosmos-snap-provider';
 
 const offlineSigner = new cosmjsOfflineSigner(chainId);
 const accounts = await offlineSigner.getAccounts();
-const rpcUrl = "" // Replace with an RPC URL for the given chainId
+const rpcUrl = ""; // Populate with an RPC URL corresponding to the given chainId
+
 const stargateClient = await SigningStargateClient.connectWithSigner(
   rpcUrl,
   offlineSigner,
   {
     gasPrice: GasPrice.fromString("0.0025ujuno"),
   }
-)
-```
+);
 
+```

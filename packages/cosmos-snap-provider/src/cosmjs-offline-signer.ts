@@ -1,7 +1,7 @@
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { AccountData, AminoSignResponse } from '@cosmjs/amino';
-import { getKey, requestSignature } from './snap';
 import { DirectSignResponse, OfflineDirectSigner } from '@cosmjs/proto-signing';
+import { getKey, requestSignature } from './snap';
 
 export class cosmjsOfflineSigner implements OfflineDirectSigner {
   constructor(private chainId: string) {}
@@ -37,7 +37,7 @@ export class cosmjsOfflineSigner implements OfflineDirectSigner {
     ) as Promise<DirectSignResponse>;
   }
 
-  //This has been added as a placeholder.
+  // This has been added as a placeholder.
   async signAmino(
     signerAddress: string,
     signDoc: SignDoc,
@@ -49,6 +49,10 @@ export class cosmjsOfflineSigner implements OfflineDirectSigner {
   }
 }
 
+/**
+ *
+ * @param chainId
+ */
 export function getOfflineSigner(chainId: string) {
   return new cosmjsOfflineSigner(chainId);
 }

@@ -18,5 +18,12 @@
     "build": "npx tsc",
     "start": "npx tsc watch",
     "prepublish": "yarn build"
+  },
+  "dependencies": {
+    "@cosmjs/amino": "^0.31.0",
+    "@cosmjs/proto-signing": "^0.31.0"
+  },
+  "devDependencies": {
+    "cosmjs-types": "^0.8.0"
   }
 }

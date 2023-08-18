@@ -27,6 +27,7 @@
     "test-coverage": "jest --coverage"
   },
   "dependencies": {
+    "@cosmjs/amino": "^0.31.0",
     "@cosmjs/stargate": "^0.30.1",
     "@leapwallet/buffer-boba": "^0.1.4",
     "@leapwallet/parser-parfait": "^0.6.2",
