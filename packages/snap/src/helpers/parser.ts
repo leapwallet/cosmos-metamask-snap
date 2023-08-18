@@ -1,4 +1,4 @@
-import { text, heading, divider, copyable } from '@metamask/snaps-ui';
+import { text, heading, copyable } from '@metamask/snaps-ui';
 import {
   MessageParser,
   parfait,
@@ -16,6 +16,17 @@ import BigNumber from 'bignumber.js';
 import DENOMS from '../constants/denoms';
 
 const messageParser = new MessageParser();
+
+export const formatBigNumber = (n: BigNumber) => {
+  if (isNaN(n?.toNumber())) {
+    return '-';
+  }
+
+  if (n.lt(0.01) && !n.eq(0)) {
+    return `<0.01`;
+  }
+  return n.toFixed(2);
+};
 
 export const sliceAddress = (address?: string, visibleLetters = 5) => {
   return `${address?.slice(0, visibleLetters)}...${address?.slice(
@@ -46,17 +57,6 @@ const tokenToString = (token: Token) => {
 const tokensToString = (tokens: Token[]) => {
   const traces = tokens.map((t) => tokenToString(t));
   return traces.join(', ');
-};
-
-export const formatBigNumber = (n: BigNumber) => {
-  if (isNaN(n?.toNumber())) {
-    return '-';
-  }
-
-  if (n.lt(0.01) && !n.eq(0)) {
-    return `<0.01`;
-  }
-  return n.toFixed(2);
 };
 
 const formatAllowanceOption = (

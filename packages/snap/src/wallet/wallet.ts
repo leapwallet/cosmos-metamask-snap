@@ -171,9 +171,7 @@ export class Wallet {
 
   async signAmino(signerAddress: string, signDoc: StdSignDoc) {
     const accounts = this.getAccounts();
-    const account = accounts.find(
-      (account) => account.address === signerAddress,
-    );
+    const account = accounts.find((acc) => acc.address === signerAddress);
     if (!account) {
       throw new Error('Signer address does not match wallet address');
     }

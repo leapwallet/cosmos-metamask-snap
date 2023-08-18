@@ -590,7 +590,7 @@ const output = {
         jsonrpc: '2.0',
         method: 'getKey',
         params: {
-          chainId: 'cosmos',
+          chainId: 'test',
         },
       } as unknown as JsonRpcRequest<Json[] | Record<string, Json>>,
     },

@@ -21,6 +21,8 @@ const snapMock: any = {
       if (params.method === 'snap_dialog') {
         return true;
       }
+
+      return false;
     },
   },
 };
