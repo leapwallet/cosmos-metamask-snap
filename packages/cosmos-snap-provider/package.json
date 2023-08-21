@@ -1,11 +1,11 @@
 {
-  "version": "0.0.2",
+  "version": "0.0.3",
   "name": "@leapwallet/cosmos-snap-provider",
   "packageManager": "yarn@3.2.1",
   "files": [
     "dist/**/*"
   ],
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "repository": {
     "url": "git@github.com:leapwallet/cosmos-metamask-snap.git"
   },
