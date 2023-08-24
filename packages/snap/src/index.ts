@@ -11,6 +11,8 @@ import { generateWallet } from './wallet/wallet';
 export type RequestParams<T> = {
   readonly signDoc: T;
   readonly signerAddress: string;
+  readonly isADR36?: boolean;
+  readonly chainId?: string;
 };
 
 /**
@@ -81,11 +83,18 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 
       const { signerAddress, signDoc } = params;
 
-      // @ts-ignore
-      validateChainId(signDoc.chain_id ?? signDoc.chainId);
-      const wallet = await generateWallet({
+      //@ts-ignore
+      if (!params.isADR36) {
         // @ts-ignore
-        addressPrefix: AddressPrefixes[signDoc.chain_id ?? signDoc.chainId],
+        validateChainId(signDoc.chain_id ?? signDoc.chainId);
+      }
+
+      const wallet = await generateWallet({
+        addressPrefix:
+          AddressPrefixes[
+            // @ts-ignore
+            params.chainId ?? signDoc.chain_id ?? signDoc.chainId
+          ],
       });
 
       const defaultFee = signDoc.fee;
@@ -101,7 +110,11 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
         memo: defaultMemo,
         msgs: signDoc.msgs,
       };
-      const signResponse = await wallet.signAmino(signerAddress, sortedSignDoc);
+      const signResponse = await wallet.signAmino(
+        signerAddress,
+        sortedSignDoc,
+        { extraEntropy: !params.isADR36 },
+      );
       return signResponse;
     }
 
