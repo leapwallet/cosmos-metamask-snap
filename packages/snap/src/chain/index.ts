@@ -29,7 +29,7 @@ export const validateChain = (chainInfo: ChainInfo) => {
         throw new Error('Manadatory param bech32Config.bech32PrefixAccAddr')
       } 
       if (!bip44) {
-        throw new Error('Manadatory param chainId')
+        throw new Error('Manadatory param bip44 coinType')
       }
 
       if (bip44.coinType && typeof bip44.coinType !== 'number') {  
