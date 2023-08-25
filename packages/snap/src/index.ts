@@ -4,7 +4,6 @@ import { panel } from '@metamask/snaps-ui';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import Long from 'long';
 import { addChain, getChainDetails, getAllChains, validateChain, validateChainId } from './chain';
-import { AddressPrefixes } from './constants/addressPrefixes';
 import parser from './helpers/parser';
 import { ChainInfo } from './types/wallet';
 import { getChainPanel } from './ui/suggestChain';
