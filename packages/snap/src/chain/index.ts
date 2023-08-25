@@ -23,7 +23,7 @@ export const validateChain = (chainInfo: ChainInfo) => {
         throw new Error('Manadatory param chainName')
       } 
       if (!bech32Config) {
-        throw new Error('Manadatory param chainId')
+        throw new Error('Manadatory param bech32Config')
       } 
       if (!bech32Config.bech32PrefixAccAddr) {
         throw new Error('Manadatory param bech32Config.bech32PrefixAccAddr')
