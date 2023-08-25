@@ -1,6 +1,6 @@
 const snapMock: any = {
   success: {
-    request: (params: any) => {
+    request: async (params: any) => {
       if (params.method === 'snap_getBip44Entropy') {
         return {
           depth: 2,
@@ -22,6 +22,14 @@ const snapMock: any = {
         return true;
       }
 
+      if(params.method === 'snap_manageState') {
+        if(params.operation === 'get') {
+          return Promise.resolve({})
+        }
+        if(params.operation === 'update') {
+          return Promise.resolve({});
+        }
+      }
       return false;
     },
   },
