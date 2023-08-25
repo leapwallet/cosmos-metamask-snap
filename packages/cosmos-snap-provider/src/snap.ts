@@ -1,7 +1,7 @@
 import { AccountData } from '@cosmjs/amino';
 import Long from 'long';
 import { defaultSnapOrigin } from './config';
-import { GetSnapsResponse, Snap } from './types';
+import { ChainInfo, GetSnapsResponse, Snap } from './types';
 import { StdSignDoc, AminoSignResponse } from '@cosmjs/amino';
 
 /**
@@ -156,3 +156,21 @@ export const getKey = async (chainId: string): Promise<AccountData> => {
 };
 
 export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');
+
+export const suggestChain = async (chainInfo: ChainInfo): Promise<{ message: string, chainInfo: ChainInfo }> => {
+  return await window.ethereum.request({
+    method: 'wallet_invokeSnap',
+    params: {
+      snapId: defaultSnapOrigin,
+      request: {
+        method: 'suggestChain',
+        params: {
+          chainInfo
+        },
+      },
+    },
+  });
+};
+
+// For supporting existing providers.
+export const experimentalSuggestChain = suggestChain;
