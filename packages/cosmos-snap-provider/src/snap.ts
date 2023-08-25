@@ -2,6 +2,7 @@ import { AccountData } from '@cosmjs/amino';
 import Long from 'long';
 import { defaultSnapOrigin } from './config';
 import { GetSnapsResponse, Snap } from './types';
+import { StdSignDoc, AminoSignResponse } from '@cosmjs/amino';
 
 /**
  * Get the installed snaps in MetaMask.
@@ -42,7 +43,6 @@ export const connectSnap = async (
 export const getSnap = async (version?: string): Promise<Snap | undefined> => {
   try {
     const snaps = await getSnaps();
-
     return Object.values(snaps).find(
       (snap) =>
         snap.id === defaultSnapOrigin && (!version || snap.version === version),
@@ -105,8 +105,31 @@ export const requestSignature = async (
     },
   };
 
-  console.log('logging modified signature', modifiedSignature);
   return modifiedSignature;
+};
+export const requestSignAmino = async (
+  chainId: string,
+  signerAddress: string,
+  signDoc: StdSignDoc,
+  { isADR36: isADR36 = false } = {},
+) => {
+  const signResponse = (await window.ethereum.request({
+    method: 'wallet_invokeSnap',
+    params: {
+      snapId: defaultSnapOrigin,
+      request: {
+        method: 'signAmino',
+        params: {
+          chainId,
+          signerAddress,
+          signDoc,
+          isADR36,
+        },
+      },
+    },
+  })) as AminoSignResponse;
+
+  return signResponse;
 };
 
 export const getKey = async (chainId: string): Promise<AccountData> => {

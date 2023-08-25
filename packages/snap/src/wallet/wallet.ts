@@ -169,7 +169,11 @@ export class Wallet {
     };
   }
 
-  async signAmino(signerAddress: string, signDoc: StdSignDoc) {
+  async signAmino(
+    signerAddress: string,
+    signDoc: StdSignDoc,
+    options?: { extraEntropy: boolean },
+  ) {
     const accounts = this.getAccounts();
     const account = accounts.find((acc) => acc.address === signerAddress);
     if (!account) {
@@ -183,7 +187,7 @@ export class Wallet {
 
     const signature = await secp.sign(hash, this.privateKey, {
       canonical: true,
-      extraEntropy: true,
+      extraEntropy: options.extraEntropy ? true : undefined,
       der: false,
     });
 
