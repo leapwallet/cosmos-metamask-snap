@@ -5,6 +5,7 @@ import output from '../mocks/output.mock';
 
 describe('OnRPCRequest', () => {
   it('getKey for Invalid Chain ID', async () => {
+    (global as any).snap = snapMock.success;
     await expect(onRpcRequest(input.failure.getKey)).rejects.toThrow(
       output.failure.invalidChainId,
     );

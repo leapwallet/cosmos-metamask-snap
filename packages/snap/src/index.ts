@@ -3,9 +3,11 @@ import { OnRpcRequestHandler } from '@metamask/snaps-types';
 import { panel } from '@metamask/snaps-ui';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import Long from 'long';
-import { AddressPrefixes } from './helpers/addressPrefixes';
+import { addChain, getChainDetails, getAllChains, validateChain, validateChainId } from './chain';
+import { AddressPrefixes } from './constants/addressPrefixes';
 import parser from './helpers/parser';
-import { validateChainId } from './helpers/validateChainId';
+import { ChainInfo } from './types/wallet';
+import { getChainPanel } from './ui/suggestChain';
 import { generateWallet } from './wallet/wallet';
 
 export type RequestParams<T> = {
@@ -47,12 +49,11 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       }
 
       const { signerAddress, signDoc } = params;
-      validateChainId(signDoc.chainId);
+      await validateChainId(signDoc.chainId);
       const { low, high, unsigned } = signDoc.accountNumber;
-
-      const wallet = await generateWallet({
-        addressPrefix: AddressPrefixes[signDoc.chainId],
-      });
+      // @ts-ignore
+      const chainDetails = await getChainDetails(signDoc.chainId);
+      const wallet = await generateWallet(chainDetails);
 
       const accountNumber = new Long(low, high, unsigned);
       const sd = {
@@ -86,16 +87,13 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       //@ts-ignore
       if (!params.isADR36) {
         // @ts-ignore
-        validateChainId(signDoc.chain_id ?? signDoc.chainId);
+        await validateChainId(signDoc.chain_id ?? signDoc.chainId);
       }
 
-      const wallet = await generateWallet({
-        addressPrefix:
-          AddressPrefixes[
-            // @ts-ignore
-            params.chainId ?? signDoc.chain_id ?? signDoc.chainId
-          ],
-      });
+      // @ts-ignore
+      const chainDetails = await getChainDetails(params.chainId ?? signDoc.chain_id ?? signDoc.chainId);
+
+      const wallet = await generateWallet(chainDetails);
 
       const defaultFee = signDoc.fee;
       const defaultMemo = signDoc.memo;
@@ -120,12 +118,9 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 
     case 'getKey': {
       const { chainId } = request.params as { chainId: string };
-      validateChainId(chainId);
-
-      const wallet = await generateWallet({
-        addressPrefix: AddressPrefixes[chainId],
-      });
-
+      await validateChainId(chainId);
+      const chainDetails = await getChainDetails(chainId);
+      const wallet = await generateWallet(chainDetails);
       const accounts = wallet.getAccounts();
       return {
         address: accounts[0].address,
@@ -135,6 +130,29 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
         name: 'Cosmos',
         pubkey: new Uint8Array(Object.values(accounts[0].pubkey)),
       };
+    }
+
+    case 'suggestChain': {
+      const chainInfo = request.params as unknown as ChainInfo;
+      validateChain(chainInfo);
+      const panels = getChainPanel(origin, chainInfo);
+      const confirmed = await snap.request({
+        method: 'snap_dialog',
+        params: {
+          type: 'confirmation',
+          content: panel(panels),
+        },
+      });
+      if (!confirmed) {
+        throw new Error('User denied transaction');
+      }
+
+      await addChain(chainInfo);
+      return { message: 'Successfully added chain', chainInfo }
+    }
+
+    case 'getSupportedChains': {
+      return await getAllChains();
     }
 
     default:

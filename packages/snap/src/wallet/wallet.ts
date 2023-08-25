@@ -121,6 +121,7 @@ function pubkeyToAddress(publicKey: Uint8Array, addressPrefix: string) {
 
 export type WalletOptions = {
   addressPrefix: string;
+  coinType: number;
 };
 
 export class Wallet {
@@ -184,10 +185,10 @@ export class Wallet {
       throw new Error('Unable to derive keypair');
     }
     const hash = sha256(serializeStdSignDoc(signDoc));
-
+    const extraEntropy = options?.extraEntropy ? true : undefined;
     const signature = await secp.sign(hash, this.privateKey, {
       canonical: true,
-      extraEntropy: options.extraEntropy ? true : undefined,
+      extraEntropy,
       der: false,
     });
 
@@ -206,7 +207,7 @@ export async function generateWallet(options: WalletOptions): Promise<Wallet> {
   const atomNodeJson = (await snap.request({
     method: 'snap_getBip44Entropy',
     params: {
-      coinType: 118,
+      coinType: options.coinType,
     },
   })) as unknown as BIP44CoinTypeNode;
 
