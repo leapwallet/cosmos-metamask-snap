@@ -22,7 +22,7 @@ export type RequestParams<T> = {
   readonly chainId?: string;
 };
 
-export interface StdSignDoc {
+export type StdSignDoc = {
   readonly chain_id?: string;
   readonly chainId?: string;
   readonly account_number: string;
@@ -31,7 +31,7 @@ export interface StdSignDoc {
   readonly fee: StdFee;
   readonly msgs: readonly AminoMsg[];
   readonly memo: string;
-}
+};
 
 /**
  * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
