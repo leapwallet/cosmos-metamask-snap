@@ -30,11 +30,10 @@ jobs:
       - run: yarn
         env: 
           GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
-      - run: cd packages/cosmos-snap-provider
       - run: yarn build
         env: 
           GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
-      - run: npm publish
+      - run: npm publish:provider
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 

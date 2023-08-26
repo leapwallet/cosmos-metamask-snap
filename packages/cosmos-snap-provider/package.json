@@ -19,6 +19,7 @@
     "start": "npx tsc watch",
     "prepublish": "yarn build",
     "bootstrap": "yarn --ignore-engines",
+    "publish:package": "npm publish",
     "publish:ci": "lerna publish from-package --yes"
   },
   "dependencies": {

@@ -26,6 +26,8 @@
     "start:snap": "yarn workspace snap start",
     "build:provider": "yarn workspace @leapwallet/cosmos-snap-provider build",
     "build:snap": "yarn workspace @leapwallet/metamask-cosmos-snap build",
+    "publish:snap": "yarn workspace @leapwallet/snap publish:package",
+    "publish:provider": "yarn workspace @leapwallet/cosmos-snap-provider publish:package",
     "test": "echo \"TODO\"",
     "bootstrap": "yarn --ignore-engines",
     "publish:ci": "lerna publish from-package --yes"
