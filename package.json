@@ -42,6 +42,7 @@
     "eslint-plugin-jsdoc": "^39.2.9",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "lerna": "^7.1.5",
     "patch-package": "^7.0.0",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.2.1",

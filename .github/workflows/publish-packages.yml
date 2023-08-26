@@ -4,7 +4,7 @@ on:
   push:
     branches: [release]
     paths:
-      - 'packages/cosmos-snap-provider/**'
+      - 'packages/**'
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -22,6 +22,6 @@ jobs:
       - name: Build Provider
         run: yarn build:provider
 
-      - name: Bump version and publish package
+      - name: Publish package
         run:
-          yarn publish --non-interactive
+          yarn publish:ci
