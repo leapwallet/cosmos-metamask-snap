@@ -1,3 +1,5 @@
+name: 📦 Release Snap Package
+
 on:
   push:
     branches:
