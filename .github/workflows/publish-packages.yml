@@ -30,11 +30,11 @@ jobs:
       - run: yarn
         env:
           GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
-      - run: yarn publish:provider
+      - run: yarn build:provider && yarn publish:provider
         env:
           GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-      - run: yarn lint && yarn test && yarn publish:snap
+      - run: yarn lint && yarn test && yarn build:snap && yarn publish:snap
         env:
           GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
