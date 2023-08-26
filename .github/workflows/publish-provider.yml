@@ -2,8 +2,7 @@ name: 📦 Release Cosmos Provider Package
 
 on:
   push:
-    branches:
-      - release
+    branches: [release]
     paths:
       - 'packages/cosmos-snap-provider'
 jobs:
