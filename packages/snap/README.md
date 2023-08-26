@@ -106,6 +106,7 @@ Utilize the **`suggestChain`** method to suggest any chains of coinTypes in the 
 ];
 ```
 
+
 **Usage:**
 
 ```javascript
