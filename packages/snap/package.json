@@ -1,6 +1,6 @@
 {
   "name": "@leapwallet/metamask-cosmos-snap",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Leapwallet cosmos snap for metamask",
   "repository": {
     "type": "git",
@@ -21,11 +21,11 @@
     "lint:eslint": "eslint . --cache --ext js,ts",
     "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
     "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' --ignore-path .gitignore",
+    "prepublish": "yarn build",
     "serve": "mm-snap serve",
     "start": "mm-snap watch",
     "test": "jest",
-    "test-coverage": "jest --coverage",
-    "prepublish": "yarn build"
+    "test-coverage": "jest --coverage"
   },
   "dependencies": {
     "@cosmjs/amino": "^0.31.0",
@@ -74,9 +74,5 @@
   "packageManager": "yarn@3.2.1",
   "engines": {
     "node": ">=16.0.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
   }
 }

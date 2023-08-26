@@ -11,7 +11,6 @@ This method is used to detect if the Leap Cosmos Snap is installed within the us
 **Usage:**
 
 ```js
-
 import { getSnap } from '@leapwallet/cosmos-snap-provider';
 const snapInstalled = await getSnap(); // Returns true if the snap is already installed
 ```
@@ -28,7 +27,6 @@ const snapInstalled = await getSnap();
 if (!snapInstalled) {
   connectSnap(); // Initiates installation if not already present
 }
-
 ```
 
 ### 3. **getKey**
@@ -39,34 +37,14 @@ if (!snapInstalled) {
 const key = await getKey(chainId);
 ```
 
-
 ### 4. **Sugest Chain**
 
 Utilize the **`suggestChain`** method to suggest any chains of coinTypes in the list below
 
 ```javascript
 [
-    118, 
-    564, 
-    494, 
-    639, 
-    483, 
-    4444, 
-    701, 
-    990, 
-    394, 
-    852, 
-    7777777, 
-    459, 
-    880, 
-    931, 
-    371, 
-    505, 
-    529, 
-    234, 
-    330, 
-    5555, 
-    370
+  118, 564, 494, 639, 483, 4444, 701, 990, 394, 852, 7777777, 459, 880, 931,
+  371, 505, 529, 234, 330, 5555, 370,
 ];
 ```
 
@@ -75,15 +53,15 @@ Utilize the **`suggestChain`** method to suggest any chains of coinTypes in the 
 ```javascript
 import { suggestChain } from '@leapwallet/cosmos-snap-provider';
 await suggestChain({
-        "chainId": "coreum-mainnet-1",
-        "chainName": "coreum",
-        "bech32Config": {
-            "bech32PrefixAccAddr": "core"
-        },
-        "bip44": {
-            "coinType": 990
-        }
-    })
+  chainId: 'coreum-mainnet-1',
+  chainName: 'coreum',
+  bech32Config: {
+    bech32PrefixAccAddr: 'core',
+  },
+  bip44: {
+    coinType: 990,
+  },
+});
 ```
 
 ### 4. **cosmjsOfflineSigner**
@@ -93,20 +71,18 @@ If you're already employing cosmjs libraries for transaction signing, **`cosmjsO
 **Usage:**
 
 ```js
-
 import { SigningStargateClient } from '@cosmjs/cosmwasm-stargate';
 import { GasPrice } from '@cosmjs/stargate';
 import { cosmjsOfflineSigner } from '@leapwallet/cosmos-snap-provider';
 
 const offlineSigner = new cosmjsOfflineSigner(chainId);
 const accounts = await offlineSigner.getAccounts();
-const rpcUrl = ""; // Populate with an RPC URL corresponding to the given chainId
+const rpcUrl = ''; // Populate with an RPC URL corresponding to the given chainId
 const stargateClient = await SigningStargateClient.connectWithSigner(
   rpcUrl,
   offlineSigner,
   {
-    gasPrice: GasPrice.fromString("0.0025ujuno"),
-  }
+    gasPrice: GasPrice.fromString('0.0025ujuno'),
+  },
 );
-
 ```

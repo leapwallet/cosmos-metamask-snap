@@ -3,7 +3,13 @@ import { OnRpcRequestHandler } from '@metamask/snaps-types';
 import { panel } from '@metamask/snaps-ui';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import Long from 'long';
-import { addChain, getChainDetails, getAllChains, validateChain, validateChainId } from './chain';
+import {
+  addChain,
+  getChainDetails,
+  getAllChains,
+  validateChain,
+  validateChainId,
+} from './chain';
 import parser from './helpers/parser';
 import { ChainInfo } from './types/wallet';
 import { getChainPanel } from './ui/suggestChain';
@@ -50,7 +56,6 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       const { signerAddress, signDoc } = params;
       await validateChainId(signDoc.chainId);
       const { low, high, unsigned } = signDoc.accountNumber;
-      // @ts-ignore
       const chainDetails = await getChainDetails(signDoc.chainId);
       const wallet = await generateWallet(chainDetails);
 
@@ -83,14 +88,18 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 
       const { signerAddress, signDoc } = params;
 
-      //@ts-ignore
-      if (!params.isADR36) {
-        // @ts-ignore
-        await validateChainId(signDoc.chain_id ?? signDoc.chainId);
+      if (!params.chainId || signDoc.chain_id || signDoc.chainId) {
+        throw new Error('ChainId is mandatory params');
       }
 
-      // @ts-ignore
-      const chainDetails = await getChainDetails(params.chainId ?? signDoc.chain_id ?? signDoc.chainId);
+      const receivedChainId =
+        params.chainId ?? signDoc.chain_id ?? signDoc.chainId;
+
+      if (!params.isADR36) {
+        await validateChainId(receivedChainId);
+      }
+
+      const chainDetails = await getChainDetails(receivedChainId);
 
       const wallet = await generateWallet(chainDetails);
 
@@ -98,9 +107,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       const defaultMemo = signDoc.memo;
 
       const sortedSignDoc = {
-        // @ts-ignore
-        chain_id: signDoc.chain_id ?? signDoc.chainId,
-        // @ts-ignore
+        chain_id: receivedChainId,
         account_number: signDoc.account_number ?? signDoc.accountNumber,
         sequence: signDoc.sequence,
         fee: defaultFee,
@@ -132,7 +139,9 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     }
 
     case 'suggestChain': {
-      const { chainInfo } = request.params as unknown as { chainInfo: ChainInfo};
+      const { chainInfo } = request.params as unknown as {
+        chainInfo: ChainInfo;
+      };
       validateChain(chainInfo);
       const panels = getChainPanel(origin, chainInfo);
       const confirmed = await snap.request({
@@ -147,7 +156,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       }
 
       await addChain(chainInfo);
-      return { message: 'Successfully added chain', chainInfo }
+      return { message: 'Successfully added chain', chainInfo };
     }
 
     case 'getSupportedChains': {

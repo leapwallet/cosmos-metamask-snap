@@ -1,8 +1,8 @@
-import { AccountData } from '@cosmjs/amino';
+/* eslint @typescript-eslint/prefer-optional-chain: 0 */ // --> OFF
+import { AccountData, StdSignDoc, AminoSignResponse } from '@cosmjs/amino';
 import Long from 'long';
 import { defaultSnapOrigin } from './config';
 import { ChainInfo, GetSnapsResponse, Snap } from './types';
-import { StdSignDoc, AminoSignResponse } from '@cosmjs/amino';
 
 /**
  * Get the installed snaps in MetaMask.
@@ -78,39 +78,42 @@ export const requestSignature = async (
   });
 
   const { accountNumber } = signDoc;
-  // @ts-ignore
+  if (
+    !accountNumber ||
+    !accountNumber.low ||
+    !accountNumber.unsigned ||
+    !accountNumber.high
+  ) {
+    throw new Error('Invalid account Number, It should be a long format');
+  }
+
   const modifiedAccountNumber = new Long(
-    accountNumber!.low,
-    accountNumber!.high,
-    accountNumber!.unsigned,
+    accountNumber.low,
+    accountNumber.high,
+    accountNumber.unsigned,
   );
 
   const modifiedSignature = {
-    // @ts-ignore
     signature: signature.signature,
     signed: {
-      // @ts-ignore
       ...signature.signed,
       accountNumber: `${modifiedAccountNumber.toString()}`,
       authInfoBytes: new Uint8Array(
-        // @ts-ignore
         Object.values(signature.signed.authInfoBytes),
       ),
 
-      bodyBytes: new Uint8Array(
-        // @ts-ignore
-        Object.values(signature.signed.bodyBytes),
-      ),
+      bodyBytes: new Uint8Array(Object.values(signature.signed.bodyBytes)),
     },
   };
 
   return modifiedSignature;
 };
+
 export const requestSignAmino = async (
   chainId: string,
   signerAddress: string,
   signDoc: StdSignDoc,
-  { isADR36: isADR36 = false } = {},
+  { isADR36 = false } = {},
 ) => {
   const signResponse = (await window.ethereum.request({
     method: 'wallet_invokeSnap',
@@ -148,7 +151,7 @@ export const getKey = async (chainId: string): Promise<AccountData> => {
   if (!accountData) {
     throw new Error('No account data found');
   }
-  // @ts-ignore
+
   accountData.pubkey = Uint8Array.from(Object.values(accountData.pubkey));
 
   return accountData as AccountData;
@@ -156,7 +159,9 @@ export const getKey = async (chainId: string): Promise<AccountData> => {
 
 export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');
 
-export const suggestChain = async (chainInfo: ChainInfo): Promise<{ message: string, chainInfo: ChainInfo }> => {
+export const suggestChain = async (
+  chainInfo: ChainInfo,
+): Promise<{ message: string; chainInfo: ChainInfo }> => {
   return await window.ethereum.request({
     method: 'wallet_invokeSnap',
     params: {
@@ -164,7 +169,7 @@ export const suggestChain = async (chainInfo: ChainInfo): Promise<{ message: str
       request: {
         method: 'suggestChain',
         params: {
-          chainInfo
+          chainInfo,
         },
       },
     },

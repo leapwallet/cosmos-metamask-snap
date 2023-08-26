@@ -28,14 +28,13 @@ jobs:
           node-version: 16
           registry-url: 'https://registry.npmjs.org'
       - run: yarn
-        env: 
+        env:
           GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
       - run: yarn publish:provider
         env:
           GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-      - run: yarn publish:snap
+      - run: yarn lint && yarn test && yarn publish:snap
         env:
           GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
