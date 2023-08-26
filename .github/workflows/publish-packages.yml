@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 16
           registry-url: 'https://registry.npmjs.org'
-      - run: export ${{secrets.NODE_AUTH_TOKEN}} && yarn
+      - run: export GH_TOKEN=${{secrets.NODE_AUTH_TOKEN}} && yarn
       - run: cd packages/cosmos-snap-provider
       - run: yarn build
       - run: npm publish
