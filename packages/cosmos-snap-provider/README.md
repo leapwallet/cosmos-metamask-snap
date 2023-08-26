@@ -41,7 +41,7 @@ const key = await getKey(chainId);
 ```
 
 
-### 2. **Sugest Chain**
+### 4. **Sugest Chain**
 
 Utilize the **`suggestChain`** method to suggest any chains of coinTypes in the list below
 
