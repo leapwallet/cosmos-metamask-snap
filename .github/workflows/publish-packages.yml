@@ -20,7 +20,7 @@ jobs:
           scope: '@leapwallet'
 
       - name: Build Provider
-        run: yarn build:provider
+        run: yarn bootstrap
 
       - name: Publish package
         run:
