@@ -75,3 +75,58 @@ await window.ethereum.request({
 });
 
 ```
+
+### 2. **Sugest Chain**
+
+Utilize the **`suggestChain`** method to suggest any chains of coinTypes in the list below
+
+```javascript
+[
+    118, 
+    564, 
+    494, 
+    639, 
+    483, 
+    4444, 
+    701, 
+    990, 
+    394, 
+    852, 
+    7777777, 
+    459, 
+    880, 
+    931, 
+    371, 
+    505, 
+    529, 
+    234, 
+    330, 
+    5555, 
+    370
+];
+```
+
+**Usage:**
+
+```javascript
+await window.ethereum.request({
+    method: 'wallet_invokeSnap',
+    params: {
+      snapId: "local:http://localhost:8000",
+      request: {
+        method: 'suggestChain',
+        params: {
+          chainId: "canto_7700-1",
+          chainName: "canto",
+          bip44: {
+            coinType: 564,
+          },
+          bech32Config: {
+            bech32PrefixAccAddr: "canto",
+          },
+        },
+      },
+    },
+  })
+
+```
