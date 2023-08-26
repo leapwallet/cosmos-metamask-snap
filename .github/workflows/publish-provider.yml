@@ -4,7 +4,7 @@ on:
   push:
     branches: [release]
     paths:
-      - 'packages/cosmos-snap-provider'
+      - 'packages/cosmos-snap-provider/**'
 jobs:
   release:
     runs-on: ubuntu-latest
