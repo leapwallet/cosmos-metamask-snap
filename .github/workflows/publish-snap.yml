@@ -1,4 +1,4 @@
-name: 📦 Release Packages
+name: 📦 Release Snap Package
 
 on:
   push:
