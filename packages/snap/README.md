@@ -36,7 +36,6 @@ For comprehensive details on connecting or installing a Metamask snap, refer **[
 The **`getKey`** method retrieves the wallet's public address corresponding to a specific chain ID. Currently, we support chains of coin type 118.
 
 **Usage:**
-
 ```javascript
 const accountData = await window.ethereum.request({
   method: 'wallet_invokeSnap',
