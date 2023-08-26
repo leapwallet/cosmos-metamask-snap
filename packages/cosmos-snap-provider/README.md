@@ -13,7 +13,6 @@ This method is used to detect if the Leap Cosmos Snap is installed within the us
 ```js
 
 import { getSnap } from '@leapwallet/cosmos-snap-provider';
-
 const snapInstalled = await getSnap(); // Returns true if the snap is already installed
 ```
 
