@@ -25,6 +25,7 @@
     "start": "yarn workspaces foreach --parallel --interlaced --verbose run start",
     "start:snap": "yarn workspace snap start",
     "build:provider": "yarn workspace @leapwallet/cosmos-snap-provider build",
+    "build:snap": "yarn workspace @leapwallet/metamask-cosmos-snap build",
     "test": "echo \"TODO\""
   },
   "devDependencies": {
