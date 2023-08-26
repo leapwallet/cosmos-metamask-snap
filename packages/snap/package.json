@@ -24,7 +24,8 @@
     "serve": "mm-snap serve",
     "start": "mm-snap watch",
     "test": "jest",
-    "test-coverage": "jest --coverage"
+    "test-coverage": "jest --coverage",
+    "prepublish": "yarn build"
   },
   "dependencies": {
     "@cosmjs/amino": "^0.31.0",
