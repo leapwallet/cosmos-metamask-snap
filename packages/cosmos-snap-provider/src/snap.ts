@@ -9,7 +9,6 @@ import { StdSignDoc, AminoSignResponse } from '@cosmjs/amino';
  *
  * @returns The snaps installed in MetaMask.
  */
-
 export const getSnaps = async (): Promise<GetSnapsResponse> => {
   return (await window.ethereum.request({
     method: 'wallet_getSnaps',
