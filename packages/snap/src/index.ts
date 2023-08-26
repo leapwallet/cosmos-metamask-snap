@@ -1,4 +1,4 @@
-import { StdSignDoc } from '@cosmjs/amino';
+import { AminoMsg, StdFee } from '@cosmjs/amino';
 import { OnRpcRequestHandler } from '@metamask/snaps-types';
 import { panel } from '@metamask/snaps-ui';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
@@ -20,6 +20,17 @@ export type RequestParams<T> = {
   readonly signerAddress: string;
   readonly isADR36?: boolean;
   readonly chainId?: string;
+};
+
+export type StdSignDoc = {
+  readonly chain_id?: string;
+  readonly chainId?: string;
+  readonly account_number: string;
+  readonly accountNumber?: string;
+  readonly sequence: string;
+  readonly fee: StdFee;
+  readonly msgs: readonly AminoMsg[];
+  readonly memo: string;
 };
 
 /**
