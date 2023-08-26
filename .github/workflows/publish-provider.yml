@@ -5,7 +5,7 @@ on:
     branches:
       - release
     paths:
-      - 'packages/comos-snap-provider'
+      - 'packages/cosmos-snap-provider'
 jobs:
   release:
     runs-on: ubuntu-latest

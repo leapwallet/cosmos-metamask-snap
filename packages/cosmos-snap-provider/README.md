@@ -25,7 +25,6 @@ const snapInstalled = await getSnap(); // Returns true if the snap is already in
 ```js
 
 import { getSnap, connectSnap } from '@leapwallet/cosmos-snap-provider';
-
 const snapInstalled = await getSnap();
 if (!snapInstalled) {
   connectSnap(); // Initiates installation if not already present
@@ -56,7 +55,6 @@ import { cosmjsOfflineSigner } from '@leapwallet/cosmos-snap-provider';
 const offlineSigner = new cosmjsOfflineSigner(chainId);
 const accounts = await offlineSigner.getAccounts();
 const rpcUrl = ""; // Populate with an RPC URL corresponding to the given chainId
-
 const stargateClient = await SigningStargateClient.connectWithSigner(
   rpcUrl,
   offlineSigner,
