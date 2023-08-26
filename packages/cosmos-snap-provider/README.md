@@ -40,6 +40,55 @@ if (!snapInstalled) {
 const key = await getKey(chainId);
 ```
 
+
+### 2. **Sugest Chain**
+
+Utilize the **`suggestChain`** method to suggest any chains of coinTypes in the list below
+
+```javascript
+[
+    118, 
+    564, 
+    494, 
+    639, 
+    483, 
+    4444, 
+    701, 
+    990, 
+    394, 
+    852, 
+    7777777, 
+    459, 
+    880, 
+    931, 
+    371, 
+    505, 
+    529, 
+    234, 
+    330, 
+    5555, 
+    370
+];
+```
+
+**Usage:**
+
+```javascript
+import { suggestChain } from '@leapwallet/cosmos-snap-provider';
+await suggestChain({
+          chainId: "canto_7700-1",
+          chainName: "canto",
+          bip44: {
+            coinType: 564,
+          },
+          bech32Config: {
+            bech32PrefixAccAddr: "canto",
+          },
+        }
+      )
+```
+
+
 ### 4. **cosmjsOfflineSigner**
 
 If you're already employing cosmjs libraries for transaction signing, **`cosmjsOfflineSigner`** is recommended. It functions as an offline signer with existing cosmwasm clients. Before utilizing it as an offline signer, verify that the dapp is connected to the Snap.

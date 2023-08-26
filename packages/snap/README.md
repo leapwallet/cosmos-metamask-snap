@@ -116,15 +116,17 @@ await window.ethereum.request({
       request: {
         method: 'suggestChain',
         params: {
-          chainId: "canto_7700-1",
-          chainName: "canto",
-          bip44: {
-            coinType: 564,
+          chainInfo: {
+            chainId: "canto_7700-1",
+            chainName: "canto",
+            bip44: {
+              coinType: 564,
+            },
+            bech32Config: {
+              bech32PrefixAccAddr: "canto",
+            },
           },
-          bech32Config: {
-            bech32PrefixAccAddr: "canto",
-          },
-        },
+        }
       },
     },
   })
