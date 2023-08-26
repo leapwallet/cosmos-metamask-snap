@@ -1,3 +1,5 @@
+name: 📦 Release Cosmos Provider Package
+
 on:
   push:
     branches:
