@@ -24,7 +24,6 @@ const snapInstalled = await getSnap(); // Returns true if the snap is already in
 **Usage:**
 
 ```js
-
 import { getSnap, connectSnap } from '@leapwallet/cosmos-snap-provider';
 const snapInstalled = await getSnap();
 if (!snapInstalled) {
