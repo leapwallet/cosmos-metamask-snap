@@ -87,7 +87,6 @@ await suggestChain({
       )
 ```
 
-
 ### 4. **cosmjsOfflineSigner**
 
 If you're already employing cosmjs libraries for transaction signing, **`cosmjsOfflineSigner`** is recommended. It functions as an offline signer with existing cosmwasm clients. Before utilizing it as an offline signer, verify that the dapp is connected to the Snap.
