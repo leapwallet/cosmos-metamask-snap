@@ -9,10 +9,6 @@
   "repository": {
     "url": "git@github.com:leapwallet/cosmos-metamask-snap.git"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
   "license": "(MIT-0 OR Apache-2.0)",
   "scripts": {
     "build": "npx tsc",
