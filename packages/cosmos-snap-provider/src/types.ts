@@ -7,14 +7,14 @@ export type Snap = {
   initialPermissions: Record<string, unknown>;
 };
 
-export interface Bech32Config {
+export type Bech32Config = {
   readonly bech32PrefixAccAddr: string;
   readonly bech32PrefixAccPub: string;
   readonly bech32PrefixValAddr: string;
   readonly bech32PrefixValPub: string;
   readonly bech32PrefixConsAddr: string;
   readonly bech32PrefixConsPub: string;
-}
+};
 
 type GasPriceStep = {
   low: number;
@@ -22,7 +22,7 @@ type GasPriceStep = {
   high: number;
 };
 
-export interface FeeCurrency {
+export type FeeCurrency = {
   readonly coinDenom: string;
   readonly coinMinimalDenom: string;
   readonly coinDecimals: number;
@@ -33,9 +33,9 @@ export interface FeeCurrency {
   readonly coinGeckoId?: string;
   readonly coinImageUrl?: string;
   readonly gasPriceStep?: GasPriceStep;
-}
+};
 
-export interface AppCurrency {
+export type AppCurrency = {
   readonly coinDenom: string;
   readonly coinMinimalDenom: string;
   readonly coinDecimals: number;
@@ -45,29 +45,29 @@ export interface AppCurrency {
    */
   readonly coinGeckoId?: string;
   readonly coinImageUrl?: string;
-}
+};
 
-export interface ChainInfo {
+export type ChainInfo = {
   readonly rpc?: string;
   readonly rest?: string;
   readonly chainId: string;
   readonly chainName: string;
   /**
-  * This indicates the type of coin that can be used for stake.
-  * You can get actual currency information from Currencies.
-  */
+   * This indicates the type of coin that can be used for stake.
+   * You can get actual currency information from Currencies.
+   */
   readonly stakeCurrency?: AppCurrency;
   readonly bip44: {
-      coinType: number;
+    coinType: number;
   };
   readonly bech32Config: Bech32Config;
-  
+
   readonly currencies: AppCurrency[];
   /**
-  * This indicates which coin or token can be used for fee to send transaction.
-  * You can get actual currency information from Currencies.
-  */
+   * This indicates which coin or token can be used for fee to send transaction.
+   * You can get actual currency information from Currencies.
+   */
   readonly feeCurrencies: FeeCurrency[];
-  
-  image: string
-}
+
+  image: string;
+};

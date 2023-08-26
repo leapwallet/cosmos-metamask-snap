@@ -1,33 +1,29 @@
 {
-  "version": "0.0.6",
   "name": "@leapwallet/cosmos-snap-provider",
-  "packageManager": "yarn@3.2.1",
-  "files": [
-    "dist/**/*"
-  ],
-  "main": "dist/index.js",
+  "version": "0.0.7",
   "repository": {
     "url": "git@github.com:leapwallet/cosmos-metamask-snap.git"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
   "license": "(MIT-0 OR Apache-2.0)",
+  "main": "dist/index.js",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
-    "build": "npx tsc",
-    "start": "npx tsc watch",
-    "prepublish": "yarn build",
     "bootstrap": "yarn --ignore-engines",
+    "build": "npx tsc",
+    "prepublish": "yarn build",
     "publish:package": "npm publish",
-    "publish:ci": "lerna publish from-package --yes"
+    "start": "npx tsc watch"
   },
   "dependencies": {
     "@cosmjs/amino": "^0.31.0",
-    "@cosmjs/proto-signing": "^0.31.0"
+    "@cosmjs/proto-signing": "^0.31.0",
+    "long": "^5.2.3"
   },
   "devDependencies": {
     "cosmjs-types": "^0.8.0",
     "typescript": "^5.2.2"
-  }
+  },
+  "packageManager": "yarn@3.2.1"
 }

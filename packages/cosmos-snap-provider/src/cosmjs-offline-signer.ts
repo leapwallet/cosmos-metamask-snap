@@ -1,10 +1,15 @@
+/* eslint jsdoc/match-description: 0 */ // --> OFF
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { AccountData, AminoSignResponse, StdSignDoc } from '@cosmjs/amino';
 import { DirectSignResponse, OfflineDirectSigner } from '@cosmjs/proto-signing';
 import { getKey, requestSignAmino, requestSignature } from './snap';
 
-export class cosmjsOfflineSigner implements OfflineDirectSigner {
-  constructor(private chainId: string) {}
+export class CosmjsOfflineSigner implements OfflineDirectSigner {
+  readonly chainId: string;
+
+  constructor(chainId: string) {
+    this.chainId = chainId;
+  }
 
   async getAccounts(): Promise<AccountData[]> {
     const key = await getKey(this.chainId);
@@ -60,35 +65,54 @@ export class cosmjsOfflineSigner implements OfflineDirectSigner {
 }
 
 /**
+ * Gives the cosmos Offline signer
  *
- * @param chainId
+ * @param chainId - chainId
+ * @returns CosmjsOfflineSigner
  */
 export function getOfflineSigner(chainId: string) {
-  return new cosmjsOfflineSigner(chainId);
+  return new CosmjsOfflineSigner(chainId);
 }
 
+/**
+ * Helps to do signArbitrary of the data provided
+ *
+ * @param chainId - chainId
+ * @param signer - signer
+ * @param data - data
+ * @returns signature
+ */
 export async function signArbitrary(
   chainId: string,
   signer: string,
   data: string,
 ) {
-  const { signDoc, isADR36WithString } = getADR36SignDoc(signer, data);
+  const { signDoc } = getADR36SignDoc(signer, data);
   const result = await requestSignAmino(chainId, signer, signDoc, {
     isADR36: true,
   });
   return result.signature;
 }
 
+/**
+ *
+ * Gets the getADR36SignDoc of the signer and data
+ *
+ * @param signer - signer
+ * @param data - data
+ * @returns SignDoc and isADR36WithString
+ */
 function getADR36SignDoc(
   signer: string,
   data: string | Uint8Array,
 ): { signDoc: StdSignDoc; isADR36WithString: boolean } {
   let isADR36WithString = false;
+  let b64Data = '';
   if (typeof data === 'string') {
-    data = Buffer.from(data).toString('base64');
+    b64Data = Buffer.from(data).toString('base64');
     isADR36WithString = true;
   } else {
-    data = Buffer.from(data).toString('base64');
+    b64Data = Buffer.from(data).toString('base64');
   }
   const signDoc = {
     chain_id: '',
@@ -103,7 +127,7 @@ function getADR36SignDoc(
         type: 'sign/MsgSignData',
         value: {
           signer,
-          data,
+          b64Data,
         },
       },
     ],

@@ -22,11 +22,12 @@ const snapMock: any = {
         return true;
       }
 
-      if(params.method === 'snap_manageState') {
-        if(params.operation === 'get') {
-          return Promise.resolve({})
+      if (params.method === 'snap_manageState') {
+        if (params.operation === 'get') {
+          return Promise.resolve({});
         }
-        if(params.operation === 'update') {
+
+        if (params.operation === 'update') {
           return Promise.resolve({});
         }
       }
