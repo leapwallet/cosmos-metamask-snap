@@ -132,7 +132,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
     }
 
     case 'suggestChain': {
-      const chainInfo = request.params as unknown as ChainInfo;
+      const { chainInfo } = request.params as unknown as { chainInfo: ChainInfo};
       validateChain(chainInfo);
       const panels = getChainPanel(origin, chainInfo);
       const confirmed = await snap.request({

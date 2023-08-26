@@ -1,5 +1,5 @@
 {
-  "version": "0.0.4",
+  "version": "0.0.5",
   "name": "@leapwallet/cosmos-snap-provider",
   "packageManager": "yarn@3.2.1",
   "files": [
@@ -17,13 +17,16 @@
   "scripts": {
     "build": "npx tsc",
     "start": "npx tsc watch",
-    "prepublish": "yarn build"
+    "prepublish": "yarn build",
+    "bootstrap": "yarn --ignore-engines",
+    "publish:ci": "lerna publish from-package --yes"
   },
   "dependencies": {
     "@cosmjs/amino": "^0.31.0",
     "@cosmjs/proto-signing": "^0.31.0"
   },
   "devDependencies": {
-    "cosmjs-types": "^0.8.0"
+    "cosmjs-types": "^0.8.0",
+    "typescript": "^5.2.2"
   }
 }
