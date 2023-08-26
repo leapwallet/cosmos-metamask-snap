@@ -1,5 +1,5 @@
 {
-  "version": "0.0.5",
+  "version": "0.0.6",
   "name": "@leapwallet/cosmos-snap-provider",
   "packageManager": "yarn@3.2.1",
   "files": [
@@ -8,6 +8,10 @@
   "main": "dist/index.js",
   "repository": {
     "url": "git@github.com:leapwallet/cosmos-metamask-snap.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "license": "(MIT-0 OR Apache-2.0)",
   "scripts": {
