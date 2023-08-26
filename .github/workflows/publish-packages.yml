@@ -30,13 +30,12 @@ jobs:
       - run: yarn
         env: 
           GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
-      - run: yarn build
-        env: 
-          GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
       - run: yarn publish:provider
         env:
+          GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: yarn publish:snap
         env:
+          GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
