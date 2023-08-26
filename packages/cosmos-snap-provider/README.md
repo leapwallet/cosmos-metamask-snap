@@ -75,16 +75,15 @@ Utilize the **`suggestChain`** method to suggest any chains of coinTypes in the 
 ```javascript
 import { suggestChain } from '@leapwallet/cosmos-snap-provider';
 await suggestChain({
-          chainId: "canto_7700-1",
-          chainName: "canto",
-          bip44: {
-            coinType: 564,
-          },
-          bech32Config: {
-            bech32PrefixAccAddr: "canto",
-          },
+        "chainId": "coreum-mainnet-1",
+        "chainName": "coreum",
+        "bech32Config": {
+            "bech32PrefixAccAddr": "core"
+        },
+        "bip44": {
+            "coinType": 990
         }
-      )
+    })
 ```
 
 ### 4. **cosmjsOfflineSigner**
