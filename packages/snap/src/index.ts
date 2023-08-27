@@ -99,12 +99,12 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 
       const { signerAddress, signDoc } = params;
 
-      if (!params.chainId || signDoc.chain_id || signDoc.chainId) {
+      const receivedChainId =
+        params.chainId || signDoc.chain_id || signDoc.chainId || '';
+
+      if (!receivedChainId) {
         throw new Error('ChainId is mandatory params');
       }
-
-      const receivedChainId =
-        params.chainId ?? signDoc.chain_id ?? signDoc.chainId;
 
       if (!params.isADR36) {
         await validateChainId(receivedChainId);
