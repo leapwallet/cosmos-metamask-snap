@@ -1,6 +1,6 @@
 {
-  "name": "@leapwallet/cosmos-snap-provider",
-  "version": "0.1.12-beta.1",
+  "name": "@leapwallet/cosmos-snap-provider-beta",
+  "version": "0.1.12",
   "repository": {
     "url": "git@github.com:leapwallet/cosmos-metamask-snap.git"
   },

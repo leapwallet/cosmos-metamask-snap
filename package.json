@@ -19,17 +19,17 @@
   "scripts": {
     "bootstrap": "yarn --ignore-engines",
     "build": "yarn workspaces foreach --parallel --topological --verbose run build",
-    "build:provider": "yarn workspace @leapwallet/cosmos-snap-provider build",
-    "build:snap": "yarn workspace @leapwallet/metamask-cosmos-snap build",
+    "build:provider": "yarn workspace @leapwallet/cosmos-snap-provider-beta build",
+    "build:snap": "yarn workspace @leapwallet/metamask-cosmos-snap-beta build",
     "lint": "yarn lint:eslint && yarn lint:misc --check",
     "lint:eslint": "eslint . --cache --ext js,ts",
     "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
     "lint:misc": "prettier '**/*.json' '**/*.md' '!**/CHANGELOG.md' '**/*.yml' --ignore-path .gitignore",
-    "publish:provider": "yarn workspace @leapwallet/cosmos-snap-provider publish:package",
-    "publish:snap": "yarn workspace @leapwallet/metamask-cosmos-snap publish:package",
+    "publish:provider": "yarn workspace @leapwallet/cosmos-snap-provider-beta publish:package",
+    "publish:snap": "yarn workspace @leapwallet/metamask-cosmos-snap-beta publish:package",
     "start": "yarn workspaces foreach --parallel --interlaced --verbose run start",
     "start:snap": "yarn workspace snap start",
-    "test": "yarn workspace @leapwallet/metamask-cosmos-snap test"
+    "test": "yarn workspace @leapwallet/metamask-cosmos-snap-beta test"
   },
   "dependencies": {
     "long": "^5.2.3"

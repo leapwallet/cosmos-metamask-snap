@@ -11,7 +11,7 @@ This method is used to detect if the Leap Cosmos Snap is installed within the us
 **Usage:**
 
 ```js
-import { getSnap } from '@leapwallet/cosmos-snap-provider';
+import { getSnap } from '@leapwallet/cosmos-snap-provider-beta';
 
 const snapInstalled = await getSnap(); // Returns true if the snap is already installed
 ```
@@ -23,7 +23,7 @@ const snapInstalled = await getSnap(); // Returns true if the snap is already in
 **Usage:**
 
 ```js
-import { getSnap, connectSnap } from '@leapwallet/cosmos-snap-provider';
+import { getSnap, connectSnap } from '@leapwallet/cosmos-snap-provider-beta';
 const snapInstalled = await getSnap();
 if (!snapInstalled) {
   connectSnap(); // Initiates installation if not already present
@@ -52,7 +52,7 @@ Utilize the **`suggestChain`** method to suggest any chains of coinTypes in the 
 **Usage:**
 
 ```javascript
-import { suggestChain } from '@leapwallet/cosmos-snap-provider';
+import { suggestChain } from '@leapwallet/cosmos-snap-provider-beta';
 await suggestChain({
   chainId: 'coreum-mainnet-1',
   chainName: 'coreum',
@@ -74,7 +74,7 @@ If you're already employing cosmjs libraries for transaction signing, **`cosmjsO
 ```js
 import { SigningStargateClient } from '@cosmjs/cosmwasm-stargate';
 import { GasPrice } from '@cosmjs/stargate';
-import { cosmjsOfflineSigner } from '@leapwallet/cosmos-snap-provider';
+import { cosmjsOfflineSigner } from '@leapwallet/cosmos-snap-provider-beta';
 
 const offlineSigner = new cosmjsOfflineSigner(chainId);
 const accounts = await offlineSigner.getAccounts();

@@ -2496,9 +2496,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@leapwallet/cosmos-snap-provider@workspace:packages/cosmos-snap-provider":
+"@leapwallet/cosmos-snap-provider-beta@workspace:packages/cosmos-snap-provider":
   version: 0.0.0-use.local
-  resolution: "@leapwallet/cosmos-snap-provider@workspace:packages/cosmos-snap-provider"
+  resolution: "@leapwallet/cosmos-snap-provider-beta@workspace:packages/cosmos-snap-provider"
   dependencies:
     "@cosmjs/amino": ^0.31.0
     "@cosmjs/proto-signing": ^0.31.0
@@ -2508,9 +2508,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@leapwallet/metamask-cosmos-snap@workspace:packages/snap":
+"@leapwallet/metamask-cosmos-snap-beta@workspace:packages/snap":
   version: 0.0.0-use.local
-  resolution: "@leapwallet/metamask-cosmos-snap@workspace:packages/snap"
+  resolution: "@leapwallet/metamask-cosmos-snap-beta@workspace:packages/snap"
   dependencies:
     "@cosmjs/amino": ^0.31.0
     "@cosmjs/stargate": ^0.30.1
