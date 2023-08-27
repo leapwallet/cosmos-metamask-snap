@@ -78,19 +78,11 @@ export const requestSignature = async (
   });
 
   const { accountNumber } = signDoc;
-  if (
-    !accountNumber ||
-    !accountNumber.low ||
-    !accountNumber.unsigned ||
-    !accountNumber.high
-  ) {
-    throw new Error('Invalid account Number, It should be a long format');
-  }
 
   const modifiedAccountNumber = new Long(
-    accountNumber.low,
-    accountNumber.high,
-    accountNumber.unsigned,
+    accountNumber?.low || 0,
+    accountNumber?.high,
+    accountNumber?.unsigned,
   );
 
   const modifiedSignature = {
