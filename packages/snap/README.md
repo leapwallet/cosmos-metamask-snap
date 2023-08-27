@@ -1,4 +1,4 @@
-### **`@leapwallet/metamask-cosmos-snap`**
+### **`@leapwallet/metamask-cosmos-snap-beta`**
 
 This Snap facilitates signing of Cosmos transactions for chains associated with coin type 118.
 
