@@ -1,6 +1,6 @@
 {
   "name": "@leapwallet/metamask-cosmos-snap",
-  "version": "0.1.11",
+  "version": "0.1.12-beta.1",
   "description": "Leapwallet cosmos snap for metamask",
   "repository": {
     "type": "git",
