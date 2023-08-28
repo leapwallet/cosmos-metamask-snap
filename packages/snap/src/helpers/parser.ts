@@ -361,7 +361,10 @@ const parser = {
       ];
 
       parsedMessages.forEach((msg) => {
-        return panels.push(heading(`${getMessageDetails(msg.parsed, msg.raw)}`));
+        const panelMsg =  getMessageDetails(msg.parsed, msg.raw);
+        if (panelMsg !== 'Unknown Transaction Type') {
+          panels.push(heading(`${getMessageDetails(msg.parsed, msg.raw)}`));
+        }
       });
 
       if (parsedMessages) {
