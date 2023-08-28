@@ -1,7 +1,7 @@
 {
   "name": "@leapwallet/metamask-cosmos-snap",
-  "version": "0.1.13",
-  "description": "Leapwallet cosmos snap for metamask",
+  "version": "0.1.14",
+  "description": "Securely manage keys, connect to Cosmos dapps, and sign transactions.",
   "repository": {
     "type": "git",
     "url": "https://github.com/leapwallet/cosmos-metamask-snap.git"

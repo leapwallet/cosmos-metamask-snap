@@ -1,7 +1,7 @@
 {
   "version": "0.1.13",
-  "description": "Leap wallet sample snap",
-  "proposedName": "Leap Wallet",
+  "description": "Securely manage keys, connect to Cosmos dapps, and sign transactions.",
+  "proposedName": "Leap Cosmos Wallet",
   "repository": {
     "type": "git",
     "url": "https://github.com/leapwallet/cosmos-metamask-snap.git"
