@@ -5,7 +5,9 @@ import {
   ParsedMessage,
   ParsedMessageType,
   Token,
+  CosmosGovVoteOption,
 } from '@leapwallet/parser-parfait';
+
 import {
   convertObjectCasingFromCamelToSnake,
   DirectSignDocDecoder,
@@ -16,6 +18,44 @@ import BigNumber from 'bignumber.js';
 import DENOMS from '../constants/denoms';
 
 const messageParser = new MessageParser();
+
+export const convertVoteOptionToString = (
+  voteOption: CosmosGovVoteOption | number | null,
+): string => {
+  switch (voteOption) {
+    case 1:
+      return 'Yes';
+    case 2:
+      return 'Abstain';
+    case 3:
+      return 'No';
+    case 4:
+      return 'No with Veto';
+    case CosmosGovVoteOption.YES:
+      return 'Yes';
+    case CosmosGovVoteOption.ABSTAIN:
+      return 'Abstain';
+    case CosmosGovVoteOption.NO:
+      return 'No';
+    case CosmosGovVoteOption.NO_WITH_VETO:
+      return 'No with Veto';
+    case CosmosGovVoteOption.UNSPECIFIED:
+      return 'Unspecified';
+    default:
+      return 'Unspecified';
+  }
+};
+
+export const getProposalId = (proposalId: any) => {
+  if (typeof proposalId === 'string') {
+    return proposalId;
+  }
+
+  if (typeof proposalId === 'object') {
+    return proposalId.low;
+  }
+  return proposalId;
+};
 
 export const formatBigNumber = (n: BigNumber) => {
   if (isNaN(n?.toNumber())) {
@@ -83,7 +123,7 @@ export const getSimpleType = (type: string | undefined) => {
   return parts[parts.length - 1] ?? '';
 };
 
-export const getMessageDetails = (message: ParsedMessage): string => {
+export const getMessageDetails = (message: ParsedMessage, raw: any): string => {
   switch (message.__type) {
     case ParsedMessageType.AuthzExec:
       return `${sliceAddress(
@@ -169,7 +209,9 @@ export const getMessageDetails = (message: ParsedMessage): string => {
         message.initialDeposit,
       )}`;
     case ParsedMessageType.GovVote:
-      return `Vote ${message.option} on proposal ${message.proposalId}`;
+      return `Vote ${convertVoteOptionToString(
+        message.option || raw?.option,
+      )} on proposal ${getProposalId(message?.proposalId)}`;
     case ParsedMessageType.GovDeposit:
       return `Deposit ${tokensToString(message?.amount ?? [])} on proposal ${
         message.proposalId
@@ -320,8 +362,12 @@ const parser = {
         copyable(`${origin}`),
         heading(''),
       ];
+
       parsedMessages.forEach((msg) => {
-        return panels.push(heading(`${getMessageDetails(msg.parsed)}`));
+        const panelMsg = getMessageDetails(msg.parsed, msg.raw);
+        if (panelMsg !== 'Unknown Transaction Type') {
+          panels.push(heading(`${getMessageDetails(msg.parsed, msg.raw)}`));
+        }
       });
 
       if (parsedMessages) {
