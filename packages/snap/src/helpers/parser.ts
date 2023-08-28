@@ -4,7 +4,6 @@ import {
   parfait,
   ParsedMessage,
   ParsedMessageType,
-  RawTransaction,
   Token,
   CosmosGovVoteOption,
 } from '@leapwallet/parser-parfait';
@@ -20,8 +19,9 @@ import DENOMS from '../constants/denoms';
 
 const messageParser = new MessageParser();
 
-
-export const convertVoteOptionToString = (voteOption: CosmosGovVoteOption | number | null): string => {
+export const convertVoteOptionToString = (
+  voteOption: CosmosGovVoteOption | number | null,
+): string => {
   switch (voteOption) {
     case 1:
       return 'Yes';
@@ -47,14 +47,15 @@ export const convertVoteOptionToString = (voteOption: CosmosGovVoteOption | numb
 };
 
 export const getProposalId = (proposalId: any) => {
-  if(typeof proposalId === 'string') {
+  if (typeof proposalId === 'string') {
     return proposalId;
   }
-  if(typeof proposalId === 'object') {
+
+  if (typeof proposalId === 'object') {
     return proposalId.low;
   }
   return proposalId;
-}
+};
 
 export const formatBigNumber = (n: BigNumber) => {
   if (isNaN(n?.toNumber())) {
@@ -208,7 +209,9 @@ export const getMessageDetails = (message: ParsedMessage, raw: any): string => {
         message.initialDeposit,
       )}`;
     case ParsedMessageType.GovVote:
-      return `Vote ${convertVoteOptionToString(message.option || raw?.option)} on proposal ${getProposalId(message?.proposalId)}`;
+      return `Vote ${convertVoteOptionToString(
+        message.option || raw?.option,
+      )} on proposal ${getProposalId(message?.proposalId)}`;
     case ParsedMessageType.GovDeposit:
       return `Deposit ${tokensToString(message?.amount ?? [])} on proposal ${
         message.proposalId
@@ -361,7 +364,7 @@ const parser = {
       ];
 
       parsedMessages.forEach((msg) => {
-        const panelMsg =  getMessageDetails(msg.parsed, msg.raw);
+        const panelMsg = getMessageDetails(msg.parsed, msg.raw);
         if (panelMsg !== 'Unknown Transaction Type') {
           panels.push(heading(`${getMessageDetails(msg.parsed, msg.raw)}`));
         }
