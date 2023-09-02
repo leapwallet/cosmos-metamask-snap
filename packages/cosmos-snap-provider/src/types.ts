@@ -74,4 +74,4 @@ export type ChainInfo = {
 
 export type SignAminoOptions = {
   preferNoSetFee?: boolean;
-}
+};
