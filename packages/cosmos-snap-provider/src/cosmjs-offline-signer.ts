@@ -2,11 +2,12 @@
 /* eslint require-atomic-updates: 0 */ // --> OFF
 
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
-import { AccountData, AminoSignResponse, StdSignDoc } from '@cosmjs/amino';
+import { AccountData, AminoSignResponse } from '@cosmjs/amino';
 import { DirectSignResponse, OfflineDirectSigner } from '@cosmjs/proto-signing';
+import BigNumber from 'bignumber.js';
 import { getKey, requestSignAmino, requestSignature } from './snap';
-import { getGasPriceForChainName, toSmall } from './helper/gas';
-import { SignAminoOptions } from './types';
+import { getGasPriceForChainName } from './helper/gas';
+import { SignAminoOptions, StdSignDoc } from './types';
 import Chains from './constants/chainInfo';
 
 export class CosmjsOfflineSigner implements OfflineDirectSigner {
@@ -68,10 +69,15 @@ export class CosmjsOfflineSigner implements OfflineDirectSigner {
       const gasPriceFromRegistry = await getGasPriceForChainName(
         chain.chainName,
       );
+      const gas: any =
+        'gasLimit' in signDoc.fee ? signDoc.fee.gasLimit : signDoc.fee.gas;
       if (gasPriceFromRegistry) {
         const amount = [
           {
-            amount: toSmall(gasPriceFromRegistry, chain?.decimals),
+            amount: new BigNumber(gasPriceFromRegistry)
+              .multipliedBy(new BigNumber(gas))
+              .decimalPlaces(0, 1)
+              .toString(),
             denom: chain.denom,
           },
         ];
