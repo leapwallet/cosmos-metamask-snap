@@ -71,3 +71,7 @@ export type ChainInfo = {
 
   image: string;
 };
+
+export type SignAminoOptions = {
+  preferNoSetFee?: boolean;
+}
