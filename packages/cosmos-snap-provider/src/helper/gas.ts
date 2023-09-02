@@ -1,4 +1,5 @@
 import BN from 'bignumber.js';
+const defaultDecimals = 6;
 
 export const getGasPriceForChainName = async (chainName: string, gasLevel:string = 'average') => {
     const gasPriceRegistry: any = await fetch('https://assets.leapwallet.io/cosmos-registry/v1/gas/gas-prices.json');
@@ -11,8 +12,6 @@ export const getGasPriceForChainName = async (chainName: string, gasLevel:string
     return gasPrices?.[chainName]?.[gasLevel]
 }
 
-
-const defaultDecimals = 6;
 export function toSmall(quantity: string, decimals: number = defaultDecimals): string {
   return new BN(quantity).times(Math.pow(10, decimals)).toFixed().toString();
 }
