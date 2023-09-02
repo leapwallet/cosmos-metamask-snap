@@ -1,1 +1,1 @@
-export const defaultSnapOrigin = `npm:@leapwallet/metamask-cosmos-snap-beta`;
+export const defaultSnapOrigin = `npm:@leapwallet/metamask-cosmos-snap`;
