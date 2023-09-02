@@ -37,9 +37,7 @@ export class CosmjsOfflineSigner implements OfflineDirectSigner {
     if (accounts.find((account) => account.address !== signerAddress)) {
       throw new Error('Signer address does not match wallet address');
     }
-
-    console.log(signDoc);
-
+    
     return requestSignature(
       this.chainId,
       signerAddress,
