@@ -1,3 +1,5 @@
+import { AminoMsg, Coin } from '@cosmjs/amino';
+
 export type GetSnapsResponse = Record<string, Snap>;
 
 export type Snap = {
@@ -74,4 +76,21 @@ export type ChainInfo = {
 
 export type SignAminoOptions = {
   preferNoSetFee?: boolean;
+};
+
+export type StdFee = {
+  amount: readonly Coin[];
+  readonly gas: string;
+  /** The granter address that is used for paying with feegrants */
+  readonly granter?: string;
+  /** The fee payer address. The payer must have signed the transaction. */
+  readonly payer?: string;
+};
+export type StdSignDoc = {
+  readonly chain_id: string;
+  readonly account_number: string;
+  readonly sequence: string;
+  fee: StdFee;
+  readonly msgs: readonly AminoMsg[];
+  readonly memo: string;
 };
