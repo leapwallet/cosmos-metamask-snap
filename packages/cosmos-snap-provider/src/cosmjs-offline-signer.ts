@@ -3,9 +3,9 @@ import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { AccountData, AminoSignResponse, StdSignDoc } from '@cosmjs/amino';
 import { DirectSignResponse, OfflineDirectSigner } from '@cosmjs/proto-signing';
 import { getKey, requestSignAmino, requestSignature } from './snap';
-import { getGasPriceForChainId } from './helper/gas';
+import { getGasPriceForChainName, toSmall } from './helper/gas';
 import { SignAminoOptions } from './types';
-import DENOMS from './constants/denoms';
+import Chains from './constants/chainInfo';
 
 export class CosmjsOfflineSigner implements OfflineDirectSigner {
   readonly chainId: string;
@@ -62,18 +62,19 @@ export class CosmjsOfflineSigner implements OfflineDirectSigner {
       throw new Error('Signer address does not match wallet address');
     }
 
-    const gasPrice = await getGasPriceForChainId(this.chainId);
-    const denom = DENOMS[this.chainId as keyof typeof DENOMS];
-
+    const chain =  Chains[this.chainId as keyof typeof Chains];
     // Override gasPrice
-    if(!options?.preferNoSetFee && gasPrice && denom) {
-      const amount = [
-        {
-          amount: gasPrice,
-          denom: denom.coinMinimalDenom
-        }
-      ];
-      signDoc.fee.amount = amount;
+    if(!options?.preferNoSetFee && chain && chain.denom) {
+      const gasPriceFromRegistry = await getGasPriceForChainName(chain.chainName);
+      if(gasPriceFromRegistry) {
+        const amount = [
+          {
+            amount: toSmall(gasPriceFromRegistry, chain?.decimals),
+            denom: chain.denom
+          }
+        ];
+        signDoc.fee.amount = amount;
+      }
     }
 
     return requestSignAmino(

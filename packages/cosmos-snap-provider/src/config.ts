@@ -1,2 +1,2 @@
 export const defaultSnapOrigin =
-  process.env.SNAP_ORIGIN ?? `local:http://localhost:8000`;
+  process.env.SNAP_ORIGIN ?? `npm:@leapwallet/metamask-cosmos-snap`;
