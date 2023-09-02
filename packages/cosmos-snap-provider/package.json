@@ -19,6 +19,7 @@
   "dependencies": {
     "@cosmjs/amino": "^0.31.0",
     "@cosmjs/proto-signing": "^0.31.0",
+    "bignumber.js": "^9.1.2",
     "long": "^5.2.3"
   },
   "devDependencies": {
