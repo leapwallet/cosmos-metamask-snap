@@ -79,7 +79,7 @@ const tokenToString = (token: Token) => {
   try {
     const trace = DENOMS[token.denomination as keyof typeof DENOMS];
     if (!trace) {
-      throw new Error('No');
+      throw new Error('Denomination not found for the token specified.');
     }
     return `${formatBigNumber(
       new BigNumber(token.quantity).dividedBy(10 ** trace.coinDecimals),
@@ -195,11 +195,17 @@ export const getMessageDetails = (message: ParsedMessage, raw: any): string => {
       )}`;
     }
     case ParsedMessageType.GammSwapExactAndExit:
+      return `Sell ${message.shares} shares for ${tokenToString(
+        message.tokenOut,
+      )} and exit pool ${message.poolId}`;
     case ParsedMessageType.GammSwapMaxAndExit:
       return `Sell ${message.shares} shares for ${tokenToString(
         message.tokenOut,
       )} and exit pool ${message.poolId}`;
     case ParsedMessageType.GammSwapExactAndJoin:
+      return `Buy ${message.shares} shares for ${tokenToString(
+        message.tokenIn,
+      )} and join pool ${message.poolId}`;
     case ParsedMessageType.GammSwapMaxAndJoin:
       return `Buy ${message.shares} shares for ${tokenToString(
         message.tokenIn,
@@ -366,7 +372,7 @@ const parser = {
       parsedMessages.forEach((msg) => {
         const panelMsg = getMessageDetails(msg.parsed, msg.raw);
         if (panelMsg !== 'Unknown Transaction Type') {
-          panels.push(heading(`${getMessageDetails(msg.parsed, msg.raw)}`));
+          panels.push(heading(`${panelMsg}`));
         }
       });
 

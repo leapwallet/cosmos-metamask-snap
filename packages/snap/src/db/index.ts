@@ -25,15 +25,6 @@ const db = {
     });
   },
 
-  async set(key: string, value: any) {
-    const newState: any = {};
-    newState[key] = value;
-    return await snap.request({
-      method: 'snap_manageState',
-      params: { operation: 'update', newState },
-    });
-  },
-
   async get(key: string) {
     const persistedData = await getAll();
     if (persistedData) {

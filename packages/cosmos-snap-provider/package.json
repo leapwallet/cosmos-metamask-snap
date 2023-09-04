@@ -1,6 +1,6 @@
 {
   "name": "@leapwallet/cosmos-snap-provider",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "repository": {
     "url": "git@github.com:leapwallet/cosmos-metamask-snap.git"
   },
@@ -19,6 +19,7 @@
   "dependencies": {
     "@cosmjs/amino": "^0.31.0",
     "@cosmjs/proto-signing": "^0.31.0",
+    "bignumber.js": "^9.1.2",
     "long": "^5.2.3"
   },
   "devDependencies": {
