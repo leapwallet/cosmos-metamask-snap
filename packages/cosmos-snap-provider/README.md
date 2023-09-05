@@ -62,6 +62,19 @@ await suggestChain({
   bip44: {
     coinType: 990,
   },
+  feeCurrencies: [
+    {
+      coinDenom: "ucore",
+      coinMinimalDenom: "ucore",
+      coinDecimals: 6,
+      coinGeckoId: "coreum",
+      gasPriceStep: {
+        low: 0.0625,
+        average: 0.5,
+        high: 62.5,
+      },
+    },
+  ],
 });
 ```
 
