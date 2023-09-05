@@ -11,11 +11,11 @@ export type Snap = {
 
 export type Bech32Config = {
   readonly bech32PrefixAccAddr: string;
-  readonly bech32PrefixAccPub: string;
-  readonly bech32PrefixValAddr: string;
-  readonly bech32PrefixValPub: string;
-  readonly bech32PrefixConsAddr: string;
-  readonly bech32PrefixConsPub: string;
+  readonly bech32PrefixAccPub?: string;
+  readonly bech32PrefixValAddr?: string;
+  readonly bech32PrefixValPub?: string;
+  readonly bech32PrefixConsAddr?: string;
+  readonly bech32PrefixConsPub?: string;
 };
 
 type GasPriceStep = {
@@ -64,14 +64,14 @@ export type ChainInfo = {
   };
   readonly bech32Config: Bech32Config;
 
-  readonly currencies: AppCurrency[];
+  readonly currencies?: AppCurrency[];
   /**
    * This indicates which coin or token can be used for fee to send transaction.
    * You can get actual currency information from Currencies.
    */
-  readonly feeCurrencies: FeeCurrency[];
+  readonly feeCurrencies?: FeeCurrency[];
 
-  image: string;
+  image?: string;
 };
 
 export type SignAminoOptions = {
