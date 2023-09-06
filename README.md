@@ -1,7 +1,8 @@
 # @leapwallet/cosmos-metamask-snap
 
-MetaMask Snaps is a system that allows anyone to safely expand the capabilities of MetaMask. A _snap_ is a program that we run in an isolated environment that can customize the wallet experience.
+[![npm version](https://badge.fury.io/js/@leapwallet%2Fcosmos-snap-provider.svg)](https://badge.fury.io/js/@leapwallet%2Fcosmos-snap-provider)
 
-## Snaps is pre-release software
+[Leap](leapwallet.io) has developed a Cosmos Snap, allowing users to leverage their MetaMask wallets for signing Cosmos transactions.
 
-To interact with Snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features.
+- [Docs](https://docs.leapwallet.io/cosmos/leap-metamask-snap/introduction)
+- [Integration Guide](https://docs.leapwallet.io/cosmos/leap-metamask-snap/integrating-snaps)
