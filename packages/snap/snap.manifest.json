@@ -7,11 +7,11 @@
     "url": "https://github.com/leapwallet/cosmos-metamask-snap.git"
   },
   "source": {
-    "shasum": "zQTTZLVakbAQDYDBFVxeOfqE+pgb9qDTcYxtkkxTv5Y=",
+    "shasum": "fUhRUQU8XoAzYlPYNzQJA3VyetaHdPjaX9uxVGT161w=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
-        "iconPath": "images/icon.png",
+        "iconPath": "images/icon.svg",
         "packageName": "@leapwallet/metamask-cosmos-snap",
         "registry": "https://registry.npmjs.org/"
       }
