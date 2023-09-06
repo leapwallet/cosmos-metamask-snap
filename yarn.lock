@@ -2430,11 +2430,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@leapwallet/buffer-boba@npm:^0.1.4":
-  version: 0.1.4
-  resolution: "@leapwallet/buffer-boba@npm:0.1.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40leapwallet%2Fbuffer-boba%2F0.1.4%2Fc6b57b58391a761b4e9aa9e798f911940c01f224"
+"@leapwallet/buffer-boba@npm:0.1.5":
+  version: 0.1.5
+  resolution: "@leapwallet/buffer-boba@npm:0.1.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40leapwallet%2Fbuffer-boba%2F0.1.5%2Fb6c0f7ed79d16b9a7e6a165b75327a5c18dc6e72"
   dependencies:
     "@cosmjs/proto-signing": 0.30.1
+    base64js: 1.0.1
+    cosmjs-types: 0.8.0
     long: 5.2.0
     osmojs: 15.2.1
     protobufjs: 7.2.3
@@ -2444,7 +2446,7 @@ __metadata:
     osmojs: 15.2.1
     protobufjs: 7.2.3
     stridejs: 0.6.2
-  checksum: a09d7854ff9ca4509722eaaa5f3fecc9dfe4da8c72145f2300154bd979c1db765b3b060c28ffc4f6370f5a857e48c8bc93e842633f0ba68e5641afe71b78a931
+  checksum: 0065f0c0e4dfc5132dd2802fd22145dea03ce3e5ccf7f69cbff5cdf22c1912b0188425691314e4e2b056e545731ed1f20ad1a31fd441fa1fdc5d57d42ea037db
   languageName: node
   linkType: hard
 
@@ -2493,7 +2495,7 @@ __metadata:
     "@cosmjs/amino": ^0.31.0
     "@cosmjs/stargate": ^0.30.1
     "@lavamoat/allow-scripts": ^2.0.3
-    "@leapwallet/buffer-boba": ^0.1.4
+    "@leapwallet/buffer-boba": 0.1.5
     "@leapwallet/parser-parfait": ^0.6.2
     "@metamask/auto-changelog": ^2.6.0
     "@metamask/eslint-config": ^10.0.0
@@ -4100,6 +4102,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"base64js@npm:1.0.1":
+  version: 1.0.1
+  resolution: "base64js@npm:1.0.1"
+  checksum: e5ea7e3e03d14609c439d2aff9fa1a9a0777d3207cb9e8c8939e84a396e609659e94055d3b7b31aca35b5f0d5555921707145e0627d3998d24bf005e4f979156
+  languageName: node
+  linkType: hard
+
 "bech32@npm:^1.1.4":
   version: 1.1.4
   resolution: "bech32@npm:1.1.4"
@@ -4839,6 +4848,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cosmjs-types@npm:0.8.0, cosmjs-types@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "cosmjs-types@npm:0.8.0"
+  dependencies:
+    long: ^4.0.0
+    protobufjs: ~6.11.2
+  checksum: 99714ec956d2cb2e521d39896c9c9a24cf9df0d370265c203646ea015b51e86472efc0cb11f67a80f0649d178b0bcff77ac659e67fdfc8b2437cd7a42018577f
+  languageName: node
+  linkType: hard
+
 "cosmjs-types@npm:^0.4.0":
   version: 0.4.1
   resolution: "cosmjs-types@npm:0.4.1"
@@ -4866,16 +4885,6 @@ __metadata:
     long: ^4.0.0
     protobufjs: ~6.11.2
   checksum: 4a0b730a7f1ae8efa8bd044f9ebdd7921f26319ff2abf36ac7e2f93ef6f3e73d90c1775ce2325611d47c4ccc72a708a63e31e89d9d80ad75c1107c7228e09bc8
-  languageName: node
-  linkType: hard
-
-"cosmjs-types@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "cosmjs-types@npm:0.8.0"
-  dependencies:
-    long: ^4.0.0
-    protobufjs: ~6.11.2
-  checksum: 99714ec956d2cb2e521d39896c9c9a24cf9df0d370265c203646ea015b51e86472efc0cb11f67a80f0649d178b0bcff77ac659e67fdfc8b2437cd7a42018577f
   languageName: node
   linkType: hard
 
