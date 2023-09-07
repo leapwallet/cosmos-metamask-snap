@@ -13,9 +13,11 @@ import {
   DirectSignDocDecoder,
   UnknownMessage,
 } from '@leapwallet/buffer-boba';
+import * as base64js from 'base64-js';
 
 import BigNumber from 'bignumber.js';
 import DENOMS from '../constants/denoms';
+import { base64 } from '@metamask/utils';
 
 const messageParser = new MessageParser();
 
@@ -332,7 +334,7 @@ const parser = {
         ...{ ...signDoc, bodyBytes, authInfoBytes },
         accountNumber: signDoc.accountNumber,
       });
-      const parsedMessages = docDecoder.txMsgs.map((msg) => {
+      const parsedMessages = docDecoder.txMsgs.map((msg: any) => {
         if (msg instanceof UnknownMessage) {
           const raw = msg.toJSON();
           return {
@@ -345,6 +347,17 @@ const parser = {
               },
             } as parfait.unimplemented,
           };
+        }
+
+        if (msg.unpacked.msg instanceof Uint8Array) {
+          const base64String = base64js.fromByteArray(msg.unpacked.msg);
+          const decodedString = Buffer.from(base64String, 'base64').toString();
+          try {
+            const decodedJson = JSON.parse(decodedString);
+            msg.unpacked.msg = decodedJson;
+          } catch {
+            msg.unpacked.msg = decodedString;
+          }
         }
 
         const convertedMsg = convertObjectCasingFromCamelToSnake(
