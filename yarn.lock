@@ -2430,9 +2430,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@leapwallet/buffer-boba@npm:0.1.5":
-  version: 0.1.5
-  resolution: "@leapwallet/buffer-boba@npm:0.1.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40leapwallet%2Fbuffer-boba%2F0.1.5%2Fb6c0f7ed79d16b9a7e6a165b75327a5c18dc6e72"
+"@leapwallet/buffer-boba@npm:0.1.6":
+  version: 0.1.6
+  resolution: "@leapwallet/buffer-boba@npm:0.1.6"
   dependencies:
     "@cosmjs/proto-signing": 0.30.1
     base64js: 1.0.1
@@ -2446,7 +2446,7 @@ __metadata:
     osmojs: 15.2.1
     protobufjs: 7.2.3
     stridejs: 0.6.2
-  checksum: 0065f0c0e4dfc5132dd2802fd22145dea03ce3e5ccf7f69cbff5cdf22c1912b0188425691314e4e2b056e545731ed1f20ad1a31fd441fa1fdc5d57d42ea037db
+  checksum: a86f6214874388a83f8f3883deac4a1d12e126fecde76a34930d39ca6dfc29ab54249d2fd3ff429f0a85f1755c1a96255ed473da472e8cdb74c95d96d4a3bcf1
   languageName: node
   linkType: hard
 
@@ -2495,7 +2495,7 @@ __metadata:
     "@cosmjs/amino": ^0.31.0
     "@cosmjs/stargate": ^0.30.1
     "@lavamoat/allow-scripts": ^2.0.3
-    "@leapwallet/buffer-boba": 0.1.5
+    "@leapwallet/buffer-boba": 0.1.6
     "@leapwallet/parser-parfait": ^0.6.2
     "@metamask/auto-changelog": ^2.6.0
     "@metamask/eslint-config": ^10.0.0
