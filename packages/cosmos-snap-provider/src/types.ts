@@ -96,4 +96,4 @@ export type StdSignDoc = {
   readonly memo: string;
 };
 
-export type ProvierLong = Long;
+export type ProviderLong = Long;
