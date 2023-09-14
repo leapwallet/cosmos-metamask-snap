@@ -95,6 +95,7 @@ export async function signArbitrary(
   const { signDoc } = getADR36SignDoc(signer, data);
   const result = await requestSignAmino(chainId, signer, signDoc, {
     isADR36: true,
+    preferNoSetFee: true
   });
   return result.signature;
 }
