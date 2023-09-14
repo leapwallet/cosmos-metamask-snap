@@ -77,6 +77,7 @@ export type ChainInfo = {
 
 export type SignAminoOptions = {
   preferNoSetFee?: boolean;
+  isADR36?: boolean;
 };
 
 export type StdFee = {
