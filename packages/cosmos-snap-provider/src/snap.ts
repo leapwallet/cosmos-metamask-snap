@@ -1,9 +1,12 @@
 /* eslint @typescript-eslint/prefer-optional-chain: 0 */ // --> OFF
 /* eslint jsdoc/match-description: 0 */ // --> OFF
-import { AccountData, StdSignDoc, AminoSignResponse } from '@cosmjs/amino';
+import { AccountData, AminoSignResponse } from '@cosmjs/amino';
+import BigNumber from 'bignumber.js';
 import Long from 'long';
 import { defaultSnapOrigin } from './config';
-import { ChainInfo, GetSnapsResponse, Snap } from './types';
+import Chains from './constants/chainInfo';
+import { getGasPriceForChainName } from './helper/gas';
+import { ChainInfo, GetSnapsResponse, SignAminoOptions, Snap, StdSignDoc } from './types';
 
 /**
  * The fool proof version of getting the ethereum provider suggested by
@@ -160,8 +163,39 @@ export const requestSignAmino = async (
   chainId: string,
   signerAddress: string,
   signDoc: StdSignDoc,
-  { isADR36 = false } = {},
+  options?: SignAminoOptions,
 ) => {
+
+ const {
+    isADR36 = false 
+  } = options || {};
+
+  if (chainId !== signDoc.chain_id) {
+    throw new Error('Chain ID does not match signer chain ID');
+  }
+
+  const chain = Chains[chainId as keyof typeof Chains];
+  // Override gasPrice
+  if (!options?.preferNoSetFee && chain && chain.denom) {
+    const gasPriceFromRegistry = await getGasPriceForChainName(
+      chain.chainName,
+    );
+    const gas: any =
+      'gasLimit' in signDoc.fee ? signDoc.fee.gasLimit : signDoc.fee.gas;
+    if (gasPriceFromRegistry) {
+      const amount = [
+        {
+          amount: new BigNumber(gasPriceFromRegistry)
+            .multipliedBy(new BigNumber(gas))
+            .decimalPlaces(0, 1)
+            .toString(),
+          denom: chain.denom,
+        },
+      ];
+      signDoc.fee.amount = amount;
+    }
+  }
+
   const signResponse = (await sendReqToSnap('signAmino', {
     chainId,
     signerAddress,
