@@ -70,7 +70,7 @@ export type ChainInfo = {
    * This indicates which coin or token can be used for fee to send transaction.
    * You can get actual currency information from Currencies.
    */
-  readonly feeCurrencies: FeeCurrency[];
+  readonly feeCurrencies?: FeeCurrency[];
 
   image?: string;
 };
