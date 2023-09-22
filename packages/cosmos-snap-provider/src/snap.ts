@@ -6,7 +6,7 @@ import Long from 'long';
 import { defaultSnapOrigin } from './config';
 import Chains from './constants/chainInfo';
 import { getGasPriceForChainName } from './helper/gas';
-import { ChainInfo, GetSnapsResponse, SignAminoOptions, Snap, StdSignDoc } from './types';
+import { ChainInfo, GetSnapsResponse, SignAminoOptions, Snap, StdSignDoc, SuggestChainOptions } from './types';
 
 /**
  * The fool proof version of getting the ethereum provider suggested by
@@ -224,7 +224,20 @@ export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');
 
 export const suggestChain = async (
   chainInfo: ChainInfo,
+  options: SuggestChainOptions
 ): Promise<{ message: string; chainInfo: ChainInfo }> => {
+
+  if(options && options.force) {
+    return await sendReqToSnap('suggestChain', {
+      chainInfo,
+    });
+  }
+
+  const supportedChains = await sendReqToSnap('getSupportedChains', {}) || {};
+  if (supportedChains[chainInfo.chainId]) {
+    return Promise.resolve({ message: 'Chain already added successfully', chainInfo });
+  }
+  
   return await sendReqToSnap('suggestChain', {
     chainInfo,
   });

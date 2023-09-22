@@ -98,3 +98,7 @@ export type StdSignDoc = {
 };
 
 export type ProviderLong = Long;
+
+export type SuggestChainOptions = {
+  force?: boolean
+}
