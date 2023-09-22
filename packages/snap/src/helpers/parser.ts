@@ -17,7 +17,6 @@ import * as base64js from 'base64-js';
 
 import BigNumber from 'bignumber.js';
 import DENOMS from '../constants/denoms';
-import { base64 } from '@metamask/utils';
 
 const messageParser = new MessageParser();
 

@@ -6,7 +6,14 @@ import Long from 'long';
 import { defaultSnapOrigin } from './config';
 import Chains from './constants/chainInfo';
 import { getGasPriceForChainName } from './helper/gas';
-import { ChainInfo, GetSnapsResponse, SignAminoOptions, Snap, StdSignDoc, SuggestChainOptions } from './types';
+import {
+  ChainInfo,
+  GetSnapsResponse,
+  SignAminoOptions,
+  Snap,
+  StdSignDoc,
+  SuggestChainOptions,
+} from './types';
 
 /**
  * The fool proof version of getting the ethereum provider suggested by
@@ -165,10 +172,7 @@ export const requestSignAmino = async (
   signDoc: StdSignDoc,
   options?: SignAminoOptions,
 ) => {
-
- const {
-    isADR36 = false 
-  } = options || {};
+  const { isADR36 = false } = options || {};
 
   if (chainId !== signDoc.chain_id) {
     throw new Error('Chain ID does not match signer chain ID');
@@ -177,9 +181,7 @@ export const requestSignAmino = async (
   const chain = Chains[chainId as keyof typeof Chains];
   // Override gasPrice
   if (!options?.preferNoSetFee && chain && chain.denom) {
-    const gasPriceFromRegistry = await getGasPriceForChainName(
-      chain.chainName,
-    );
+    const gasPriceFromRegistry = await getGasPriceForChainName(chain.chainName);
     const gas: any =
       'gasLimit' in signDoc.fee ? signDoc.fee.gasLimit : signDoc.fee.gas;
     if (gasPriceFromRegistry) {
@@ -224,20 +226,22 @@ export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');
 
 export const suggestChain = async (
   chainInfo: ChainInfo,
-  options: SuggestChainOptions
+  options: SuggestChainOptions,
 ): Promise<{ message: string; chainInfo: ChainInfo }> => {
-
-  if(options && options.force) {
+  if (options && options.force) {
     return await sendReqToSnap('suggestChain', {
       chainInfo,
     });
   }
 
-  const supportedChains = await sendReqToSnap('getSupportedChains', {}) || {};
+  const supportedChains = (await sendReqToSnap('getSupportedChains', {})) || {};
   if (supportedChains[chainInfo.chainId]) {
-    return Promise.resolve({ message: 'Chain already added successfully', chainInfo });
+    return Promise.resolve({
+      message: 'Chain already added successfully',
+      chainInfo,
+    });
   }
-  
+
   return await sendReqToSnap('suggestChain', {
     chainInfo,
   });

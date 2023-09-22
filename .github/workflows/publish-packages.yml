@@ -41,7 +41,7 @@ jobs:
         env:
           GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-  
+
   publish-gitHub-registry:
     runs-on: ubuntu-latest
     env:
@@ -63,7 +63,7 @@ jobs:
         run: yarn
         env:
           GH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
-      
+
       - name: 🏗️ Build Library
         run: yarn build:provider && yarn publish:provider
         env:
