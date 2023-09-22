@@ -1,4 +1,5 @@
 import { AminoMsg, Coin } from '@cosmjs/amino';
+import Long from 'long';
 
 export type GetSnapsResponse = Record<string, Snap>;
 
@@ -6,16 +7,16 @@ export type Snap = {
   permissionName: string;
   id: string;
   version: string;
-  initialPermissions: Record<string, unknown>;
+  initialPermissions: Record<string, unknown>; 
 };
 
 export type Bech32Config = {
   readonly bech32PrefixAccAddr: string;
-  readonly bech32PrefixAccPub: string;
-  readonly bech32PrefixValAddr: string;
-  readonly bech32PrefixValPub: string;
-  readonly bech32PrefixConsAddr: string;
-  readonly bech32PrefixConsPub: string;
+  readonly bech32PrefixAccPub?: string;
+  readonly bech32PrefixValAddr?: string;
+  readonly bech32PrefixValPub?: string;
+  readonly bech32PrefixConsAddr?: string;
+  readonly bech32PrefixConsPub?: string;
 };
 
 type GasPriceStep = {
@@ -64,18 +65,19 @@ export type ChainInfo = {
   };
   readonly bech32Config: Bech32Config;
 
-  readonly currencies: AppCurrency[];
+  readonly currencies?: AppCurrency[];
   /**
    * This indicates which coin or token can be used for fee to send transaction.
    * You can get actual currency information from Currencies.
    */
-  readonly feeCurrencies: FeeCurrency[];
+  readonly feeCurrencies?: FeeCurrency[];
 
-  image: string;
+  image?: string;
 };
 
 export type SignAminoOptions = {
   preferNoSetFee?: boolean;
+  isADR36?: boolean;
 };
 
 export type StdFee = {
@@ -94,3 +96,9 @@ export type StdSignDoc = {
   readonly msgs: readonly AminoMsg[];
   readonly memo: string;
 };
+
+export type ProviderLong = Long;
+
+export type SuggestChainOptions = {
+  force?: boolean
+}
