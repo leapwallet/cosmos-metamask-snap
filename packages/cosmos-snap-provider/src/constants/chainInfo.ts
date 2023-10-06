@@ -1151,6 +1151,18 @@ const Chains = {
     denom: 'uvdl',
     decimals: 6,
   },
+  'vota-ash': {
+    chainId: 'vota-ash',
+    chainName: 'doravota',
+    bech32Config: {
+      bech32PrefixAccAddr: 'dora',
+    },
+    bip44: {
+      coinType: 118,
+    },
+    denom: 'peaka',
+    decimals: 18,
+  },
 };
 
 export default Chains;
