@@ -386,27 +386,27 @@ const DENOMS = {
     icon: 'https://assets.leapwallet.io/huahua.png',
     chain: 'chihuahua',
   },
-  ucht: {
-    name: 'Chronic Token',
+  uterp: {
+    name: 'Terp Token',
     description:
-      'The CHT coin is the governance token within the Chronic Chain network, aimed to serve the entire cannabis community through its payment network, supply chain and trust network.',
-    coinDenom: 'CHT',
-    coinMinimalDenom: 'ucht',
+      'Terp Token (TERP) is the Terp Networks native utility token, used as the primary means to govern & secure the blockchain.',
+    coinDenom: 'TERP',
+    coinMinimalDenom: 'uterp',
     coinDecimals: 6,
-    coinGeckoId: 'cht',
-    icon: 'https://assets.leapwallet.io/cht.png',
-    chain: 'chronicnetwork',
+    coinGeckoId: null,
+    icon: 'https://assets.leapwallet.io/terp.png',
+    chain: 'terpnetwork',
   },
-  ucgas: {
-    name: 'Chronic Gas',
+  uthiol: {
+    name: 'Thiol Gas Token',
     description:
-      'The CGAS coin is the transactional token within the Chronic Chain network, aimed to serve the entire cannabis community through its payment network, supply chain and trust network.',
-    coinDenom: 'CGAS',
-    coinMinimalDenom: 'ucgas',
+      'Thiol Gas Token (Thiols) is the Terp Networks native utility token, used as the primary means to govern, secure the blockchain & incentivize participants',
+    coinDenom: 'TERP',
+    coinMinimalDenom: 'uthiol',
     coinDecimals: 6,
-    coinGeckoId: 'cgas',
-    icon: 'https://assets.leapwallet.io/cgas.png',
-    chain: 'chronicnetwork',
+    coinGeckoId: null,
+    icon: 'https://assets.leapwallet.io/thiol.png',
+    chain: 'terpnetwork',
   },
   ucmdx: {
     name: 'Comdex',
