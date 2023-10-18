@@ -969,6 +969,16 @@ const Chains = {
       coinType: 370,
     },
   },
+  'vota-ash': {
+    chainId: 'vota-ash',
+    chainName: 'doravota',
+    bech32Config: {
+      bech32PrefixAccAddr: 'dora',
+    },
+    bip44: {
+      coinType: 118,
+    },
+  },
 };
 
 export default Chains;
