@@ -174,7 +174,7 @@ export const requestSignAmino = async (
 ) => {
   const { isADR36 = false } = options || {};
 
-  if (chainId !== signDoc.chain_id) {
+  if (!isADR36 && chainId !== signDoc.chain_id) {
     throw new Error('Chain ID does not match signer chain ID');
   }
 

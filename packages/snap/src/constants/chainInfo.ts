@@ -161,9 +161,9 @@ const Chains = {
   },
   'morocco-1': {
     chainId: 'morocco-1',
-    chainName: 'chronicnetwork',
+    chainName: 'terpnetwork',
     bech32Config: {
-      bech32PrefixAccAddr: 'chronic',
+      bech32PrefixAccAddr: 'terp',
     },
     bip44: {
       coinType: 118,
@@ -967,6 +967,16 @@ const Chains = {
     },
     bip44: {
       coinType: 370,
+    },
+  },
+  'vota-ash': {
+    chainId: 'vota-ash',
+    chainName: 'doravota',
+    bech32Config: {
+      bech32PrefixAccAddr: 'dora',
+    },
+    bip44: {
+      coinType: 118,
     },
   },
 };
