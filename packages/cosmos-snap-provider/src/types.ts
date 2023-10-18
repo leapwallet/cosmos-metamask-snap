@@ -7,7 +7,7 @@ export type Snap = {
   permissionName: string;
   id: string;
   version: string;
-  initialPermissions: Record<string, unknown>; 
+  initialPermissions: Record<string, unknown>;
 };
 
 export type Bech32Config = {
@@ -100,5 +100,5 @@ export type StdSignDoc = {
 export type ProviderLong = Long;
 
 export type SuggestChainOptions = {
-  force?: boolean
-}
+  force?: boolean;
+};
