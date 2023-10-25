@@ -19,6 +19,7 @@ export type RequestParams<T> = {
   readonly signDoc: T;
   readonly signerAddress: string;
   readonly isADR36?: boolean;
+  readonly enableExtraEntropy?: boolean;
   readonly chainId?: string;
 };
 
@@ -128,7 +129,11 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
       const signResponse = await wallet.signAmino(
         signerAddress,
         sortedSignDoc,
-        { extraEntropy: !params.isADR36 },
+        {
+          extraEntropy: !params.enableExtraEntropy
+            ? false
+            : params.enableExtraEntropy,
+        },
       );
       return signResponse;
     }

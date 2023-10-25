@@ -172,7 +172,7 @@ export const requestSignAmino = async (
   signDoc: StdSignDoc,
   options?: SignAminoOptions,
 ) => {
-  const { isADR36 = false } = options || {};
+  const { isADR36 = false, enableExtraEntropy = false } = options || {};
 
   if (!isADR36 && chainId !== signDoc.chain_id) {
     throw new Error('Chain ID does not match signer chain ID');
@@ -203,6 +203,7 @@ export const requestSignAmino = async (
     signerAddress,
     signDoc,
     isADR36,
+    enableExtraEntropy,
   })) as AminoSignResponse;
 
   return signResponse;
