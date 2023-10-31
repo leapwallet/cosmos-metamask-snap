@@ -351,7 +351,7 @@ const Chains = {
     chainId: 'dydx-mainnet-1',
     chainName: 'dYdX Protocol',
     bech32Config: {
-      bech32PrefixAccAddr: 'empower',
+      bech32PrefixAccAddr: 'dydx',
     },
     bip44: {
       coinType: 118,
