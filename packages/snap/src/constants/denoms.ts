@@ -1,4 +1,12 @@
 const DENOMS = {
+  adydx: {
+    coinDenom: 'DYDX',
+    coinDecimals: 18,
+    coinMinimalDenom: 'adydx',
+    icon: 'https://assets.leapwallet.io/dydx.png',
+    chain: 'dydx',
+    coinGeckoId: 'dydx',
+  },
   umpwr: {
     coinDenom: 'MPWR',
     coinMinimalDenom: 'umpwr',

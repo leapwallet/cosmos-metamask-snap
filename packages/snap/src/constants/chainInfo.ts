@@ -279,6 +279,16 @@ const Chains = {
       coinType: 118,
     },
   },
+  dydx: {
+    chainId: 'dydx-mainnet-1',
+    chainName: 'dYdX Protocol',
+    bech32Config: {
+      bech32PrefixAccAddr: 'dydx',
+    },
+    bip44: {
+      coinType: '118',
+    },
+  },
   'dyson-mainnet-01': {
     chainId: 'dyson-mainnet-01',
     chainName: 'dyson',

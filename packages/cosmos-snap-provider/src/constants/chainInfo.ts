@@ -335,6 +335,17 @@ const Chains = {
     denom: 'udig',
     decimals: 6,
   },
+  dydx: {
+    chainId: 'dydx-mainnet-1',
+    bech32Config: {
+      bech32PrefixAccAddr: 'empower',
+    },
+    bip44: {
+      coinType: 118,
+    },
+    denom: 'DYDX',
+    decimals: 18,
+  },
   'dyson-mainnet-01': {
     chainId: 'dyson-mainnet-01',
     chainName: 'dyson',
