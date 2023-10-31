@@ -349,6 +349,7 @@ const Chains = {
   },
   dydx: {
     chainId: 'dydx-mainnet-1',
+    chainName: 'dYdX Protocol',
     bech32Config: {
       bech32PrefixAccAddr: 'empower',
     },
