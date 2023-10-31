@@ -7,6 +7,14 @@ const DENOMS = {
     chain: 'dydx',
     coinGeckoId: 'dydx',
   },
+  utia: {
+    coinDenom: 'TIA',
+    coinDecimals: 6,
+    coinMinimalDenom: 'utia',
+    icon: 'https://assets.leapwallet.io/filled-celestia.svg',
+    chain: 'celestia',
+    coinGeckoId: '',
+  },
   umpwr: {
     coinDenom: 'MPWR',
     coinMinimalDenom: 'umpwr',
@@ -1844,15 +1852,6 @@ const DENOMS = {
     icon: 'https://assets.leapwallet.io/planq.svg',
     chain: 'planq',
     coinGeckoId: 'planq',
-  },
-  utia: {
-    name: 'Celestia',
-    coinDenom: 'TIA',
-    coinMinimalDenom: 'utia',
-    coinDecimals: 6,
-    icon: 'https://assets.leapwallet.io/celestia.png',
-    chain: 'celestiatestnet',
-    coinGeckoId: '',
   },
   juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr: {
     name: 'Neta',

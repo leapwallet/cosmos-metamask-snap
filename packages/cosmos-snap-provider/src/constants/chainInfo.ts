@@ -179,6 +179,18 @@ const Chains = {
     denom: 'uc4e',
     decimals: 6,
   },
+  celestia: {
+    chainId: 'celestia',
+    chainName: 'Celestia',
+    bech32Config: {
+      bech32PrefixAccAddr: 'celestia',
+    },
+    bip44: {
+      coinType: 118,
+    },
+    denom: 'utia',
+    decimals: 6,
+  },
   'cheqd-mainnet-1': {
     chainId: 'cheqd-mainnet-1',
     chainName: 'cheqd',

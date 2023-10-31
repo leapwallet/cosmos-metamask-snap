@@ -149,6 +149,16 @@ const Chains = {
       coinType: 4444,
     },
   },
+  celestia: {
+    chainId: 'celestia',
+    chainName: 'Celestia',
+    bech32Config: {
+      bech32PrefixAccAddr: 'celestia',
+    },
+    bip44: {
+      coinType: 118,
+    },
+  },
   'cheqd-mainnet-1': {
     chainId: 'cheqd-mainnet-1',
     chainName: 'cheqd',
