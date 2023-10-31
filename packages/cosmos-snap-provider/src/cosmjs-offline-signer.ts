@@ -1,5 +1,6 @@
 /* eslint jsdoc/match-description: 0 */ // --> OFF
 /* eslint require-atomic-updates: 0 */ // --> OFF
+/* eslint jsdoc/require-param: 0 */ // --> OFF
 
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { AccountData, AminoSignResponse } from '@cosmjs/amino';

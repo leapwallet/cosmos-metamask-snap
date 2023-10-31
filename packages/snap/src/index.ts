@@ -1,3 +1,4 @@
+/* eslint no-negated-condition: 0 */ // --> OFF
 import { AminoMsg, StdFee } from '@cosmjs/amino';
 import { OnRpcRequestHandler } from '@metamask/snaps-types';
 import { panel } from '@metamask/snaps-ui';
