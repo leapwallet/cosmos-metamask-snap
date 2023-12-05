@@ -7,7 +7,7 @@
     "url": "https://github.com/leapwallet/cosmos-metamask-snap.git"
   },
   "source": {
-    "shasum": "BkTzGVq7tA+QxcKNaanGjcaSWECWV655TkBi0ZvTeNY=",
+    "shasum": "OrUo2Fkhm1e6DvznYmEIzdN5m8mA1H01ppMije6JpNk=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -27,6 +27,12 @@
     "snap_getBip44Entropy": [
       {
         "coinType": 118
+      },
+      {
+        "coinType": 505
+      },
+      {
+        "coinType": 990
       },
       {
         "coinType": 529
