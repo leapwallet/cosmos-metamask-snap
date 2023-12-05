@@ -191,18 +191,6 @@ const Chains = {
     denom: 'ncheq',
     decimals: 9,
   },
-  'morocco-1': {
-    chainId: 'morocco-1',
-    chainName: 'chronicnetwork',
-    bech32Config: {
-      bech32PrefixAccAddr: 'chronic',
-    },
-    bip44: {
-      coinType: 118,
-    },
-    denom: 'ucht',
-    decimals: 6,
-  },
   'comdex-1': {
     chainId: 'comdex-1',
     chainName: 'comdex',
@@ -309,6 +297,18 @@ const Chains = {
       coinType: 118,
     },
     denom: 'udec',
+    decimals: 6,
+  },
+  'morocco-1': {
+    chainId: 'morocco-1',
+    chainName: 'terpnetwork',
+    bech32Config: {
+      bech32PrefixAccAddr: 'terp',
+    },
+    bip44: {
+      coinType: 118,
+    },
+    denom: 'uterp',
     decimals: 6,
   },
   'desmos-mainnet': {
@@ -1150,6 +1150,18 @@ const Chains = {
     },
     denom: 'uvdl',
     decimals: 6,
+  },
+  'vota-ash': {
+    chainId: 'vota-ash',
+    chainName: 'doravota',
+    bech32Config: {
+      bech32PrefixAccAddr: 'dora',
+    },
+    bip44: {
+      coinType: 118,
+    },
+    denom: 'peaka',
+    decimals: 18,
   },
 };
 
