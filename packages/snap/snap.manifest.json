@@ -27,6 +27,15 @@
     "snap_getBip44Entropy": [
       {
         "coinType": 118
+      },
+      {
+        "coinType": 505
+      },
+      {
+        "coinType": 990
+      },
+      {
+        "coinType": 529
       }
     ],
     "snap_manageState": {}
