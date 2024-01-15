@@ -24,6 +24,7 @@
       "snaps": false
     },
     "endowment:network-access": {},
+    "endowment:page-home": {},
     "snap_getBip44Entropy": [
       {
         "coinType": 118

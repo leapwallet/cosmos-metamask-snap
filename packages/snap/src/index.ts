@@ -1,7 +1,8 @@
-/* eslint no-negated-condition: 0 */ // --> OFF
+/* eslint no-negated-condition: 0 */ //
 import { AminoMsg, StdFee } from '@cosmjs/amino';
 import { OnRpcRequestHandler } from '@metamask/snaps-types';
-import { panel } from '@metamask/snaps-ui';
+import type { OnHomePageHandler, Panel } from '@metamask/snaps-sdk';
+import { panel, text, heading, copyable, divider } from '@metamask/snaps-sdk';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import Long from 'long';
 import {
@@ -15,6 +16,7 @@ import parser from './helpers/parser';
 import { ChainInfo } from './types/wallet';
 import { getChainPanel } from './ui/suggestChain';
 import { generateWallet } from './wallet/wallet';
+import DENOMS from './constants/denoms';
 
 export type RequestParams<T> = {
   readonly signDoc: T;
@@ -33,6 +35,84 @@ export type StdSignDoc = {
   readonly fee: StdFee;
   readonly msgs: readonly AminoMsg[];
   readonly memo: string;
+};
+
+export const onHomePage: OnHomePageHandler = async () => {
+  console.log('reached');
+  const chainId = 'cosmoshub-4';
+  const chainDetails = await getChainDetails(chainId);
+  const wallet = await generateWallet(chainDetails);
+  const accounts = wallet.getAccounts();
+
+  const osmosisChainId = 'osmosis-1';
+  const ochainDetails = await getChainDetails(osmosisChainId);
+  const owallet = await generateWallet(ochainDetails);
+  const oaccounts = owallet.getAccounts();
+  const panels:any = [];
+  let ototal = 0;
+  const odenom = DENOMS['uosmo'].coinDenom;
+  const coinDecimals = DENOMS['uosmo'].coinDecimals;
+
+  
+  // return {content: panel([
+  //   heading('Leap metamask snap'),
+  //   text('Cosmos'),
+  //   text(`${JSON.stringify(data)}`)
+  // ]),
+  // }
+  
+  let total = 0;
+  const denom = DENOMS['uatom'].coinDenom;
+  return fetch(`https://leap-node-proxy.numia.xyz/cosmos-lcd/cosmos/staking/v1beta1/delegations/${accounts[0].address}`)
+  .then((response) => {
+    return response.json()
+  }).then((response) => {
+    
+  const coinDecimals = DENOMS['uatom'].coinDecimals;
+    response.delegation_responses && response.delegation_responses.forEach((resp: any) => {
+      if(resp.balance) {
+        total = total + Number(resp.balance.amount || '0');
+      }
+    });
+    
+  })
+  .then(() => {
+    return fetch(`https://leap-node-proxy.numia.xyz/osmosis-lcd/cosmos/staking/v1beta1/delegations/${oaccounts[0].address}`)
+  })
+  .then((response) => {
+    return response.json()
+  }).then((response) => {
+  
+    response.delegation_responses && response.delegation_responses.forEach((resp: any) => {
+      if(resp.balance) {
+        ototal = ototal + Number(resp.balance.amount || '0');
+      }
+    });
+  })
+  .then(() => {
+    return {
+      content: panel([
+        heading('CosmosHub'),
+        copyable(accounts[0].address),
+        heading('Delegations'),
+        heading(`${total/1000000} ${denom}`),
+        divider(),
+        heading('Osmosis'),
+        copyable(oaccounts[0].address),
+        heading('Delegations'),
+        heading(`${ototal/1000000} ${odenom}`),
+      ])
+    }
+  })
+  .catch((e) => {
+    return {
+      content: panel([
+        heading('Leap metamask snap'),
+        text(JSON.stringify(e.message)),
+      ]),
+    }
+  })
+  
 };
 
 /**

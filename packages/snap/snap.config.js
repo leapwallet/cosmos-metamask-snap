@@ -1,6 +1,14 @@
 const through = require('through2');
 
 module.exports = {
+  // bundler: 'webpack', // default: 'browserify'
+  // input: 'src/index.js',
+  // output: {
+  //   path: 'dist',
+  // },
+  // server: {
+  //   port: 9000,
+  // },
   cliOptions: {
     src: './src/index.ts',
     port: 8000,

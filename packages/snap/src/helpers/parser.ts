@@ -1,4 +1,4 @@
-import { text, heading, copyable } from '@metamask/snaps-ui';
+import { text, heading, copyable } from '@metamask/snaps-sdk';
 import {
   MessageParser,
   parfait,

@@ -1,5 +1,5 @@
-/* eslint @typescript-eslint/prefer-optional-chain: 0 */ // --> OFF
-/* eslint jsdoc/match-description: 0 */ // --> OFF
+/* eslint @typescript-eslint/prefer-optional-chain: 0 */ // 
+/* eslint jsdoc/match-description: 0 */ // 
 import { AccountData, AminoSignResponse } from '@cosmjs/amino';
 import BigNumber from 'bignumber.js';
 import Long from 'long';
