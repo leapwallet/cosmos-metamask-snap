@@ -149,6 +149,16 @@ const Chains = {
       coinType: 4444,
     },
   },
+  celestia: {
+    chainId: 'celestia',
+    chainName: 'Celestia',
+    bech32Config: {
+      bech32PrefixAccAddr: 'celestia',
+    },
+    bip44: {
+      coinType: 118,
+    },
+  },
   'cheqd-mainnet-1': {
     chainId: 'cheqd-mainnet-1',
     chainName: 'cheqd',
@@ -277,6 +287,16 @@ const Chains = {
     },
     bip44: {
       coinType: 118,
+    },
+  },
+  dydx: {
+    chainId: 'dydx-mainnet-1',
+    chainName: 'dYdX Protocol',
+    bech32Config: {
+      bech32PrefixAccAddr: 'dydx',
+    },
+    bip44: {
+      coinType: '118',
     },
   },
   'dyson-mainnet-01': {
