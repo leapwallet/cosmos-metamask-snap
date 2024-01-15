@@ -1,6 +1,6 @@
-/* eslint jsdoc/require-description: 0 */ // --> OFF
-/* eslint jsdoc/require-param-description: 0 */ // --> OFF
-/* eslint jsdoc/require-returns: 0 */ // --> OFF
+/* eslint jsdoc/require-description: 0 */ // 
+/* eslint jsdoc/require-param-description: 0 */ // 
+/* eslint jsdoc/require-returns: 0 */ // 
 import BN from 'bignumber.js';
 
 const defaultDecimals = 6;

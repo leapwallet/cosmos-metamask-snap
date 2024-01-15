@@ -1,5 +1,5 @@
 {
-  "version": "0.1.18",
+  "version": "0.1.20",
   "description": "Securely manage keys, connect to Cosmos dapps, and sign transactions.",
   "proposedName": "Leap Cosmos Wallet",
   "repository": {
@@ -7,12 +7,12 @@
     "url": "https://github.com/leapwallet/cosmos-metamask-snap.git"
   },
   "source": {
-    "shasum": "CLwZocaUEbDErtQAsybaudZDJq65a8AwlEFgkGUpmAQ=",
+    "shasum": "8fRFtS+cO3Igg5bBsepVDFzYvOdLHcTFQ9N98aXCvMs=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "images/icon.svg",
-        "packageName": "@leapwallet/metamask-cosmos-snap",
+        "packageName": "@leapwallet/metamask-cosmos-snap-beta",
         "registry": "https://registry.npmjs.org/"
       }
     }
@@ -24,6 +24,7 @@
       "snaps": false
     },
     "endowment:network-access": {},
+    "endowment:page-home": {},
     "snap_getBip44Entropy": [
       {
         "coinType": 118

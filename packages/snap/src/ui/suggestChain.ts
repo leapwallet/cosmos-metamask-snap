@@ -1,4 +1,4 @@
-import { copyable, heading, text } from '@metamask/snaps-ui';
+import { copyable, heading, text } from '@metamask/snaps-sdk';
 import { ChainInfo } from '../types/wallet';
 
 export const getChainPanel = (origin: string, chainInfo: ChainInfo) => {
