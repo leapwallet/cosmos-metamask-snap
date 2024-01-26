@@ -2,6 +2,7 @@
 /* eslint jsdoc/match-description: 0 */ // --> OFF
 import { AccountData, AminoSignResponse } from '@cosmjs/amino';
 import BigNumber from 'bignumber.js';
+import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import Long from 'long';
 import { defaultSnapOrigin } from './config';
 import Chains from './constants/chainInfo';
@@ -129,32 +130,22 @@ export const getSnap = async (version?: string): Promise<Snap | undefined> => {
 export const requestSignature = async (
   chainId: string,
   signerAddress: string,
-  signDoc: {
-    bodyBytes?: Uint8Array | null;
-    authInfoBytes?: Uint8Array | null;
-    chainId?: string | null;
-    accountNumber?: Long | null;
-  },
+  signDoc: SignDoc,
 ) => {
   const signature = await sendReqToSnap('signDirect', {
     chainId,
     signerAddress,
-    signDoc,
+    signDoc: {
+      ...signDoc,
+      accountNumber: Long.fromString(signDoc.accountNumber.toString(), true),
+    },
   });
-
-  const { accountNumber } = signDoc;
-
-  const modifiedAccountNumber = new Long(
-    accountNumber?.low || 0,
-    accountNumber?.high,
-    accountNumber?.unsigned,
-  );
 
   const modifiedSignature = {
     signature: signature.signature,
     signed: {
       ...signature.signed,
-      accountNumber: `${modifiedAccountNumber.toString()}`,
+      accountNumber: signDoc.accountNumber.toString(),
       authInfoBytes: new Uint8Array(
         Object.values(signature.signed.authInfoBytes),
       ),
