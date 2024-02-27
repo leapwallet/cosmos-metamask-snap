@@ -1,10 +1,9 @@
 name: 📦 Release Packages
 
 on:
-  push:
-    branches: [release]
-    paths:
-      - 'packages/**'
+  release:
+    types: [published]
+
 jobs:
   release:
     runs-on: ubuntu-latest
