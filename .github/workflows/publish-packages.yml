@@ -7,6 +7,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    if: github.event.release.prerelease == false
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
       GH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
@@ -20,6 +21,7 @@ jobs:
 
   publish-npm-registry:
     runs-on: ubuntu-latest
+    if: github.event.release.prerelease == false
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -43,6 +45,7 @@ jobs:
 
   publish-gitHub-registry:
     runs-on: ubuntu-latest
+    if: github.event.release.prerelease === false
     env:
       NEW_VERSION: ${{ github.ref_name }}
       NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
