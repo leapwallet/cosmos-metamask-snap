@@ -45,7 +45,7 @@ jobs:
 
   publish-gitHub-registry:
     runs-on: ubuntu-latest
-    if: github.event.release.prerelease === false
+    if: github.event.release.prerelease == false
     env:
       NEW_VERSION: ${{ github.ref_name }}
       NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
