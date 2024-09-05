@@ -1011,7 +1011,7 @@ const Chains = {
     chainId: 'shentu-2.2',
     chainName: 'shentu',
     bech32Config: {
-      bech32PrefixAccAddr: 'certik',
+      bech32PrefixAccAddr: 'shentu',
     },
     bip44: {
       coinType: 118,
