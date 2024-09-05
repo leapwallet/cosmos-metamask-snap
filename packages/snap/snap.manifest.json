@@ -36,6 +36,12 @@
       },
       {
         "coinType": 529
+      },
+      {
+        "coinType": 5555
+      },
+      {
+        "coinType": 234
       }
     ],
     "snap_manageState": {}
